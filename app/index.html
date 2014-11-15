@@ -14,7 +14,7 @@
 
         <title>Tienda Angular</title>
     </head>
-    <body>
+    <body ng-controller="MainController">
         <div class="main-container">
             <div class="container" ng-view></div>
         </div>
@@ -25,5 +25,9 @@
     <script type="text/javascript" src="vendor/angular/angular.js"></script>
     <script type="text/javascript" src="vendor/angular-route/angular-route.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/constants.js"></script>
+    <script type="text/javascript" src="js/controller/mainController.js"></script>
+    <script type="text/javascript" src="js/controller/productListController.js"></script>
+    <script type="text/javascript" src="js/service/productService.js"></script>
 
 </html>
