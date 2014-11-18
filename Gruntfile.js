@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
     var path = require('path');
+    var stubDir = path.resolve('stub');
 
     grunt.initConfig({
         assetsDir: 'app',
@@ -72,8 +73,13 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.registerTask('stubServer', 'Start stub web server.', function() {
+        grunt.log.writeln('Starting stub web server on '+stubDir);
+        require(stubDir+'/app.js');
+    });
+
     grunt.registerTask('default', ['jshint', 'copy', 'grep:local', 'connect:devServer', 'watch']); //dev in local
-    grunt.registerTask('dev-local', ['jshint', 'copy', 'grep:local', 'connect:devServer', 'watch']); //dev in local
+    grunt.registerTask('dev-local', ['jshint', 'copy', 'grep:local', 'stubServer', 'connect:devServer', 'watch']); //dev in local
 
     grunt.registerTask('dev-device', ['jshint','copy', 'grep:device']);//dev in device
     grunt.registerTask('prod-android', ['jshint', 'copy']);//prod TODO
