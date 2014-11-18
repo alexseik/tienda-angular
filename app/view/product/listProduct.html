@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" >
     <div class="col-xs-12">
         <div id="saveItemHeading" class="panel panel-default">
             <div class="panel-heading">
@@ -8,18 +8,19 @@
                 </div>
             </div>
             <div class="panel-body">
-                <div class="row" ng-repeat="item in itemList">
-                    <div class="col-xs-12 mbl-list-item">
+                <div class="row" ng-repeat="productDTO in productList">
+                    <div class="col-xs-12">
                         <div class="row">
-                            <a ng-href="#item/{{item.id}}">
-                                <div class="col-xs-8">
-                                    <h4>{{item.title}}</h4>
-                                    <p>Creado: {{item.timestamp}}</p>
+                            <a ng-href="#product/{{productDTO.product.id}}">
+                                <div class="col-md-6">
+                                    <div class="blockProduct">
+                                        <h4>{{productDTO.product.name}}</h4>
+                                        <p>Precio: {{productDTO.product.price}}</p>
+                                        <p>Actualizado: {{productDTO.product.updatedAt}}</p>
 
-                                    <p>Posición: ( {{item.position.latitude}}, {{item.position.longitude}} )</p>
-
-                                    <div>{{item.description}}</div>
+                                    </div>
                                 </div>
+                                <div class="col-md-6"></div>
                             </a>
                         </div>
                     </div>

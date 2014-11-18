@@ -1,9 +1,9 @@
-angular.module("app").controller("ProductListController", function ($scope, $routeParams, ItemService, $log) {
+angular.module("app").controller("ProductListController", function ($scope, $routeParams, ProductService, $log) {
     "use strict";
 
-    ItemService.list()
+    ProductService.list()
         .success(function (data) {
-            $scope.itemList = data;
+            $scope.productList = data;
 
         })
         .error(function (data, status) {

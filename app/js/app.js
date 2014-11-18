@@ -6,10 +6,11 @@ angular.module("app").config(function ($routeProvider) {
     $routeProvider.when("/home", {
         templateUrl: "../view/home.html"
     }).
-        when("/listProducts",{
-           templateUrl: "../view/product/listProduct.html"
-        }).
-        otherwise({
-            redirectTo: "/home"
-        });
+    when("/listProducts",{
+       templateUrl: "../view/product/listProduct.html",
+        controller: "ProductListController"
+    }).
+    otherwise({
+        redirectTo: "/home"
+    });
 });

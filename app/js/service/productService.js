@@ -1,7 +1,7 @@
-angular.module("app").service("ItemService", function ($http, serverConstants, $log) {
+angular.module("app").service("ProductService", function ($http, serverConstants, $log) {
     "use strict";
 
-    var route = serverConstants.baseUrl + "/item/";
+    var route = serverConstants.baseUrl + "/product/";
 
     return {
         add: function (itemDto) {
