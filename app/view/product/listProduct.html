@@ -1,0 +1,31 @@
+<div class="row" >
+    <div class="col-xs-12">
+        <div id="saveItemHeading" class="panel panel-default">
+            <div class="panel-heading">
+                <div id="inputTitle2">
+                    <button type="button" class="btn btn-info pull-right" ng-click="back()">Volver</button>
+                    Listar Productos
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row" ng-repeat="productDTO in productList">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <a ng-href="#product/{{productDTO.product.id}}">
+                                <div class="col-md-6">
+                                    <div class="blockProduct">
+                                        <h4>{{productDTO.product.name}}</h4>
+                                        <p>Precio: {{productDTO.product.price}}</p>
+                                        <p>Actualizado: {{productDTO.product.updatedAt}}</p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
