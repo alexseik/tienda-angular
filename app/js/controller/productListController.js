@@ -4,6 +4,8 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
     $scope.itemsPerPage = 8;
     $scope.pagedItems = [];
     $scope.currentPage = 0;
+    $scope.viewMode = 'grid';
+
 
     ProductService.list()
         .success(function (data) {
@@ -27,6 +29,18 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
             } else {
                 $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)].push($scope.productList[i]);
             }
+        }
+        if ($scope.currentPage > $scope.pagedItems.length){
+            $scope.currentPage=0;
+        }
+    };
+
+    $scope.setViewMode = function (mode){
+        if (mode === 'table'){
+            $scope.viewMode = mode;
+        }
+        else {
+            $scope.viewMode = 'grid';
         }
     };
 

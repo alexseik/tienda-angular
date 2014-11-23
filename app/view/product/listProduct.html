@@ -17,8 +17,19 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
+                                    <li ng-click="groupToPages(5)"><span>5 items por pag</span></li>
                                     <li ng-click="groupToPages(8)"><span>8 items por pag</span></li>
                                     <li ng-click="groupToPages(16)">16 items por pag</li>
+                                </ul>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    Vista : {{viewMode}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-click="setViewMode(grid)"><span>Rejilla</span></li>
+                                    <li ng-click="setViewMode('table')">Tabla</li>
                                 </ul>
                             </div>
                         </div>
@@ -26,7 +37,7 @@
                 </div>
             </div>
             <div class="panel-body">
-                <div class="row" >
+                <div ng-if="viewMode == 'grid'" class="row" >
                     <div class="col-md-3" ng-repeat="productDTO in pagedItems[currentPage]">
                         <div class="row">
                             <a ng-href="#product/{{productDTO.product.id}}">
@@ -41,6 +52,20 @@
                             </a>
                         </div>
                     </div>
+                </div>
+                <div ng-if="viewMode == 'table'" class="row">
+                    <table class="table">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Actualización</th>
+                        </tr>
+                        <tr ng-repeat="productDTO in pagedItems[currentPage]">
+                            <td>{{productDTO.product.name}}</td>
+                            <td>{{productDTO.product.price}}</td>
+                            <td>{{productDTO.product.updatedAt}}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="panel-footer">
