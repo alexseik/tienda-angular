@@ -15,9 +15,23 @@ var PRODUCTS = [{
     updatedAt : new Date(2013, 5, 13, 9, 30, 45),
     productImages : null
 },{
-    id : 1,
+    id : 3,
     name : "Libro",
     price : 17.50,
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 4,
+    name : "Funda",
+    price : 0.30,
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 5,
+    name : "Block dibujo carboncillo DinA3",
+    price : 3.30,
     createdAt : new Date(2012, 5, 13, 9, 30, 45),
     updatedAt : new Date(2012, 5, 13, 9, 30, 45),
     productImages : null
@@ -60,6 +74,45 @@ exports.fetchProducts = function (req, res) {
         images : [IMAGES[2].route]
     },{
         product : PRODUCTS[2],
+        images : []
+    },{
+        product : PRODUCTS[3],
+        images : []
+    },{
+        product : PRODUCTS[4],
+        images : []
+    },{
+        product : PRODUCTS[4],
+        images : []
+    },{
+        product : PRODUCTS[4],
+        images : []
+    },{
+        product : PRODUCTS[4],
+        images : []
+    },{
+        product : PRODUCTS[4],
+        images : []
+    },{
+        product : PRODUCTS[4],
+        images : []
+    },{
+        product : PRODUCTS[4],
+        images : []
+    },{
+        product : PRODUCTS[4],
+        images : []
+    },{
+        product : PRODUCTS[4],
+        images : []
+    },{
+        product : PRODUCTS[4],
+        images : []
+    },{
+        product : PRODUCTS[4],
+        images : []
+    },{
+        product : PRODUCTS[4],
         images : []
     }]
     return res.json(200, productsDTO);
