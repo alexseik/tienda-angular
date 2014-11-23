@@ -26,3 +26,7 @@ div.listProductMenu{
 div.titlePanel{
     font-size: 25px;
 }
+
+div.listProductFooter{
+    text-align: right;
+}
