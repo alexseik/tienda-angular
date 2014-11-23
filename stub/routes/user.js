@@ -16,15 +16,16 @@ var USERS = [{
 }];
 
 exports.fetchUsers = function (req, res) {
-    setDevHeader(res);
+    //setDevHeader(res);
     return res.json(200, USERS);
-}
+};
 
 exports.getUser = function (req,res){
 
-}
+};
 
 exports.authenticate = function (req,res){
+    //setDevHeader(res);
     if (!(req.body.username === 'john.doe' && req.body.password === 'foobar')) {
         res.send(401, 'Wrong user or password');
         return;
@@ -39,7 +40,7 @@ exports.authenticate = function (req,res){
     var token = jwt.sign(user, "secret", { expiresInMinutes: 60*5 });
 
     res.json({ token: token });
-}
+};
 
 function setDevHeader(res){
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000'); //TODO: EN DURO PA JODER MAS
@@ -52,7 +53,7 @@ function setDevHeader(res){
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    //res.setHeader('Access-Control-Allow-Credentials', true);
 }
 
 

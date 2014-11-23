@@ -65,7 +65,7 @@ var IMAGES = [{
 
 
 exports.fetchProducts = function (req, res) {
-    setDevHeader(res);
+    //setDevHeader(res);
     var productsDTO = [{
         product : PRODUCTS[0],
         images : [IMAGES[0].route,IMAGES[1].route]
@@ -130,5 +130,5 @@ function setDevHeader(res){
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+   // res.setHeader('Access-Control-Allow-Credentials', true);
 }
