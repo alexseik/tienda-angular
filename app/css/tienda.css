@@ -18,3 +18,11 @@ form#loginForm{
 div.userMenu {
 
 }
+
+div.listProductMenu{
+    float : right;
+}
+
+div.titlePanel{
+    font-size: 25px;
+}
