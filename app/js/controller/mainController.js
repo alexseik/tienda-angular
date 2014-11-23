@@ -1,6 +1,8 @@
 angular.module("app").controller("MainController", function ($scope, $window, $rootScope,$location, $log) {
     'use strict';
 
+    $scope.authenticatedUser = null;
+
     $scope.goTo = function (location) {
         if ($location.path() !== location) {
             $location.path(location);
