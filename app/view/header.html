@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-4"><h1>Tienda Angular</h1></div>
+    <div class="col-md-8">
+
+        <div class="menuTienda">
+            <span ng-if="authenticatedUser" class="alert alert-info">Hello {{authenticatedUser .username}}</span>
+            <div class="btn-group">
+
+                <button type="button" class="btn btn-info" ng-click="goTo('home')">Inicio</button>
+                <!-- <button type="button" class="btn btn-info" ng-click="goTo('listClients')">Clientes</button> -->
+                <button type="button" class="btn btn-info" ng-click="goTo('listProducts')">Productos</button>
+                <button type="button" class="btn btn-info" ng-click="goTo('login')">Login</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,3 +5,16 @@ div.blockProduct {
 
 
 }
+
+div.menuTienda {
+    margin-top: 20px;
+    float : right;
+}
+
+form#loginForm{
+    text-align: center;
+}
+
+div.userMenu {
+
+}

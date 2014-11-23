@@ -1,0 +1,13 @@
+<div header></div>
+<div class="row">
+    <div class="col-xs-12">
+        <span ng-if="alert">
+            <div class="alert alert-{{alert.type}}" role="alert">{{alert.msg}}</div>
+        </span>
+        <form id="loginForm" ng-submit="submit()">
+            <input ng-model="user.username" type="text" name="user" placeholder="Username" />
+            <input ng-model="user.password" type="password" name="pass" placeholder="Password" />
+            <input type="submit" value="Login" />
+        </form>
+    </div>
+</div>
