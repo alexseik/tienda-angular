@@ -40,16 +40,22 @@
                 <div ng-if="viewMode == 'grid'" class="row" >
                     <div class="col-md-3" ng-repeat="productDTO in pagedItems[currentPage]">
                         <div class="row">
-                            <a ng-href="#product/{{productDTO.product.id}}">
-                                <div class="col-md-6">
-                                    <div class="blockProduct">
+                            <div class="col-md-12">
+                                <a ng-href="#product/{{productDTO.product.id}}">
+                                    <div class="row">
                                         <h4>{{productDTO.product.name}}</h4>
-                                        <p>Precio: {{productDTO.product.price}}</p>
-                                        <p>Actualizado: {{productDTO.product.updatedAt}}</p>
                                     </div>
-                                </div>
-                                <div class="col-md-6"></div>
-                            </a>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="blockProduct">
+                                                <p>Precio: {{productDTO.product.price | currency:"&euro;"}}</p>
+                                                <span class="glyphicon glyphicon-time" aria-hidden="true">:{{productDTO.product.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
