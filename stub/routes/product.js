@@ -1,42 +1,5 @@
 "use strict";
 
-var PRODUCTS = [{
-    id : 1,
-    name : "Bolígrafo",
-    price : 0.50,
-    createdAt : new Date(2014, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-    productImages : null
-},{
-    id : 2,
-    name : "Cuaderno",
-    price : 2.50,
-    createdAt : new Date(2013, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2013, 5, 13, 9, 30, 45),
-    productImages : null
-},{
-    id : 3,
-    name : "Libro",
-    price : 17.50,
-    createdAt : new Date(2012, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
-    productImages : null
-},{
-    id : 4,
-    name : "Funda",
-    price : 0.30,
-    createdAt : new Date(2012, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
-    productImages : null
-},{
-    id : 5,
-    name : "Block dibujo carboncillo DinA3",
-    price : 3.30,
-    createdAt : new Date(2012, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
-    productImages : null
-}];
-
 var IMAGES = [{
     id : 1,
     createdAt : new Date(2014, 5, 13, 9, 30, 45),
@@ -63,72 +26,124 @@ var IMAGES = [{
     product : 2
 }];
 
+var PRODUCTS = [{
+    id : 1,
+    ean13 : 9876543213211,
+    name : "Bolígrafo",
+    pvp : 0.50,
+    createdAt : new Date(2014, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
+    productImages : [IMAGES[0],IMAGES[1]]
+},{
+    id : 2,
+    ean13 : 9876543213212,
+    name : "Cuaderno",
+    pvp : 2.50,
+    createdAt : new Date(2013, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2013, 5, 13, 9, 30, 45),
+    productImages : [IMAGES[2]]
+},{
+    id : 3,
+    name : "Libro",
+    ean13 : 9876543213213,
+    pvp : 17.50,
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 4,
+    name : "Funda",
+    ean13 : 9876543213214,
+    pvp : 0.30,
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 5,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+}];
+
 
 exports.fetchProducts = function (req, res) {
-    //setDevHeader(res);
-    var productsDTO = [{
-        product : PRODUCTS[0],
-        images : [IMAGES[0].route,IMAGES[1].route]
-    },{
-        product : PRODUCTS[1],
-        images : [IMAGES[2].route]
-    },{
-        product : PRODUCTS[2],
-        images : []
-    },{
-        product : PRODUCTS[3],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    },{
-        product : PRODUCTS[4],
-        images : []
-    }]
-    return res.json(200, productsDTO);
+    return res.json(200, PRODUCTS);
 };
 
+exports.fetchProduct = function (req, res) {
+    var id = req.param.id;
+    if (id == undefined){
+        return res.json(422, { error: 'The product id does not contain data.' })
+    }
+    if (id>PRODUCTS.length || id < 1){
+        return res.json(422, { error: 'The product ' + id + ' does not exist.' })
+    }
+    return res.json(200, PRODUCTS[id+1]);
+};
 
-function setDevHeader(res){
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000'); //TODO: EN DURO PA JODER MAS
+exports.saveProduct = function (req, res){
+    var dto = req.body;
 
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    if (dto.product == undefined){
+        return res.json(422, { error: 'The product does not contain data.' })
+    }
 
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    if (dto.images == undefined){
+        return res.json(422, { error: 'The product ' + dto.product.name + ' haven\'t got pictures.' })
+    }
 
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-   // res.setHeader('Access-Control-Allow-Credentials', true);
-}
+    for(var idx in PRODUCTS){
+        if(PRODUCTS[idx].name === dto.product.name){
+            return res.json(422, { error: 'The product ' + dto.product.name + ' it\'s already created.' });
+        }
+    }
+
+    if (dto.images != undefined){
+        dto.product.images = [];
+        for (var idx in dto.images){
+            dto.product.images = dto.product.images.concat(IMAGES[0]);
+        }
+    }
+
+    return res.json(201, dto.product);
+};
+
+exports.updateProduct = function (req, res) {
+    var id = req.param.id;
+    var dto = req.body;
+    if (id == undefined){
+        return res.json(422, { error: 'The product id does not contain data.' })
+    }
+    if (dto == undefined){
+        return res.json(422, { error: 'The DTO does not contain data.' })
+    }
+    if (dto.product == undefined && dto.images == undefined){
+        return res.json(422, { error: 'The DTO does not contain data.' })
+    }
+    var result;
+    if (dto.product != undefined){
+        result = dto.product;
+    }
+    if (dto.images != undefined){
+        result.images = [];
+        for (var idx in dto.images){
+            result.images = result.images.concat(IMAGES[0]);
+        }
+    }
+    return res.json(200, dto.product);
+};
+
+exports.deleteProduct = function (req, res){
+    var id = req.params.id;
+
+    for(var i = 0; i < PRODUCTS.length; i++){
+        if(PRODUCTS[i].id == id){
+            return res.json(204);
+        }
+    }
+
+    return res.json(200);
+};

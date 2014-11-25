@@ -55,6 +55,10 @@ app.options('*', function(req, res) {
 
 //Routes
 app.get('/rest/product', product.fetchProducts);
+app.get('/rest/product/:id', product.fetchProduct);
+app.post('/rest/product', product.saveProduct);
+app.put('/rest/product/:id', product.updateProduct);
+app.delete('/rest/product/:id', product.deleteProduct);
 app.get('/rest/user', user.fetchUsers);
 app.post('/authenticate', user.authenticate);
 //app.options.('/authenticate', user.authenticate);
