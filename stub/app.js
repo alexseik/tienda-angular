@@ -68,6 +68,14 @@ app.delete('/rest/user/:id', user.deleteUser);
 app.post('/authenticate', user.authenticate);
 //app.options.('/authenticate', user.authenticate);
 
+//Ticket rest api
+app.get('/rest/ticket', ticket.fetchTickets);
+app.get('/rest/ticket/:id', ticket.fetchTicket);
+app.get('/rest/user/:id/ticket', ticket.fetchTicketsByClient);
+app.get('/rest/invoice/:id/ticket', ticket.fetchTicketsByInvoice);
+app.post('/rest/ticket', ticket.saveTicket);
+app.put('/rest/ticket/:id', ticket.updateTicket);
+app.delete('/rest/ticket/:id',ticket.deleteTicket);
 //Server run
 module.exports = http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
