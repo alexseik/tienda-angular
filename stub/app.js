@@ -2,44 +2,53 @@
 
 //imports
 var express = require('express');
+var path = require('path');
+//var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
+
+//var methodOverride = require('method-override');
+var morgan         = require('morgan');
+var errorhandler = require('errorhandler')
+
 
 
 var product = require('./routes/product');
 var user = require('./routes/user');
 var ticket = require('./routes/ticket');
 
-var http = require('http');
-var path = require('path');
-
-
-
-
+var router = express.Router();
 var app = express();
 
 // Configuration
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
+app.set('view engine', 'jade');
+//app.use(favicon());
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser());
+//app.use(app.router);
+var router = express.Router();
 
-app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/rest', expressJwt({secret: "secret"}));
 
-app.configure('development', function(){
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
+app.use('/rest/user', expressJwt({secret: "secret"}));
 
-app.configure('production', function(){
-    app.use(express.errorHandler());
-});
+var env = process.env.NODE_ENV || 'development';
+if ('development' == env) {
+    app.use(errorhandler({ dumpExceptions: true, showStack: true }));
+}
 
-app.all('*', function(req, res, next) {
+if ('production' == env) {
+    app.use(errorhandler());
+}
+
+
+router.all('*', function(req, res, next) {
     // add details of what is allowed in HTTP request headers to the response headers
     res.header('Access-Control-Allow-Origin', req.headers.origin);
     res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
@@ -50,34 +59,44 @@ app.all('*', function(req, res, next) {
     next();
 });
 
-app.options('*', function(req, res) {
+router.options('*', function(req, res) {
     res.send(200);
 });
 
 //Routes
-app.get('/rest/product', product.fetchProducts);
-app.get('/rest/product/:id', product.fetchProduct);
-app.post('/rest/product', product.saveProduct);
-app.put('/rest/product/:id', product.updateProduct);
-app.delete('/rest/product/:id', product.deleteProduct);
+router.get('/rest/product', product.fetchProducts);
+router.get('/rest/product/:id', product.fetchProduct);
+router.post('/rest/product', product.saveProduct);
+router.put('/rest/product/:id', product.updateProduct);
+router.delete('/rest/product/:id', product.deleteProduct);
 
-app.get('/rest/user', user.fetchUsers);
-app.get('/rest/user/:id', user.fetchUser);
-app.post('rest/user',user.saveUser);
-app.put('/rest/user/:id', user.updateUser);
-app.delete('/rest/user/:id', user.deleteUser);
-app.post('/authenticate', user.authenticate);
+router.get('/rest/user', user.fetchUsers);
+router.get('/rest/user/:id', user.fetchUser);
+router.post('rest/user',user.saveUser);
+router.put('/rest/user/:id', user.updateUser);
+router.delete('/rest/user/:id', user.deleteUser);
+router.post('/authenticate', user.authenticate);
 //app.options.('/authenticate', user.authenticate);
 
 //Ticket rest api
-app.get('/rest/ticket', ticket.fetchTickets);
-app.get('/rest/ticket/:id', ticket.fetchTicket);
-app.get('/rest/user/:id/ticket', ticket.fetchTicketsByClient);
-app.get('/rest/invoice/:id/ticket', ticket.fetchTicketsByInvoice);
-app.post('/rest/ticket', ticket.saveTicket);
-app.put('/rest/ticket/:id', ticket.updateTicket);
-app.delete('/rest/ticket/:id',ticket.deleteTicket);
+router.get('/rest/ticket', ticket.fetchTickets);
+router.get('/rest/ticket/:id', ticket.fetchTicket);
+router.get('/rest/user/:id/ticket', ticket.fetchTicketsByClient);
+router.get('/rest/invoice/:id/ticket', ticket.fetchTicketsByInvoice);
+router.post('/rest/ticket', ticket.saveTicket);
+router.put('/rest/ticket/:id', ticket.updateTicket);
+router.delete('/rest/ticket/:id',ticket.deleteTicket);
+
+app.use('/', router);
+
+//app.use('/', router);
 //Server run
-module.exports = http.createServer(app).listen(app.get('port'), function(){
+/*module.exports = http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
+});*/
+var server = app.listen(3000,function(){
+    var host = server.address().address;
+    var port = server.address().port;
+
+    console.log('Example app listening at http://%s:%s', host, port);
 });
