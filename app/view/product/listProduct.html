@@ -1,7 +1,7 @@
 <div header></div>
 <div class="row" >
     <div class="col-xs-12">
-        <div id="saveItemHeading" class="panel panel-default">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-6">
@@ -38,18 +38,19 @@
             </div>
             <div class="panel-body">
                 <div ng-if="viewMode == 'grid'" class="row" >
-                    <div class="col-md-3" ng-repeat="productDTO in pagedItems[currentPage]">
+                    <div class="col-md-3" ng-repeat="product in pagedItems[currentPage]">
                         <div class="row">
                             <div class="col-md-12">
-                                <a ng-href="#product/{{productDTO.product.id}}">
+                                <a ng-href="#product/{{product.id}}">
                                     <div class="row">
-                                        <h4>{{productDTO.product.name}}</h4>
+                                        <h4>{{product.name}}</h4>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="blockProduct">
-                                                <p>Precio: {{productDTO.product.price | currency:"&euro;"}}</p>
-                                                <span class="glyphicon glyphicon-time" aria-hidden="true">:{{productDTO.product.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</span>
+                                                <h6>{{product.ean13}}</h6>
+                                                <p>Precio: {{product.pvp | currency:"&euro;"}}</p>
+                                                <span class="glyphicon glyphicon-time" aria-hidden="true">:{{product.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</span>
                                             </div>
                                         </div>
                                         <div class="col-md-6"></div>
@@ -66,10 +67,10 @@
                             <th>Precio</th>
                             <th>Actualización</th>
                         </tr>
-                        <tr ng-repeat="productDTO in pagedItems[currentPage]">
-                            <td>{{productDTO.product.name}}</td>
-                            <td>{{productDTO.product.price}}</td>
-                            <td>{{productDTO.product.updatedAt}}</td>
+                        <tr ng-repeat="product in pagedItems[currentPage]">
+                            <td><a ng-href="#product/{{product.id}}">{{product.name}}</a></td>
+                            <td>{{product.pvp  | currency:"&euro;"}}</td>
+                            <td>{{product.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
                         </tr>
                     </table>
                 </div>

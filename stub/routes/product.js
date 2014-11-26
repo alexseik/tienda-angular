@@ -61,6 +61,14 @@ var PRODUCTS = [{
 },{
     id : 5,
     ean13 : 9876543213215,
+    name : "Block dibujo",
+    pvp : 3.30,
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 6,
+    ean13 : 9876543213215,
     name : "Block dibujo carboncillo DinA3",
     pvp : 3.30,
     createdAt : new Date(2012, 5, 13, 9, 30, 45),
