@@ -3,28 +3,96 @@
     <div class="col-xs-12">
         <div id="saveItemHeading" class="panel panel-default">
             <div class="panel-heading">
-                <div id="inputTitle2">
-                    Listar Productos
-                </div>
-            </div>
-            <div class="panel-body">
-                <div class="row" ng-repeat="productDTO in productList">
-                    <div class="col-xs-12">
-                        <div class="row">
-                            <a ng-href="#product/{{productDTO.product.id}}">
-                                <div class="col-md-6">
-                                    <div class="blockProduct">
-                                        <h4>{{productDTO.product.name}}</h4>
-                                        <p>Precio: {{productDTO.product.price}}</p>
-                                        <p>Actualizado: {{productDTO.product.updatedAt}}</p>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-6"></div>
-                            </a>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="titlePanel">
+                            Lista de Productos
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="listProductMenu">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    Num Items {{itemsPerPage}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-click="groupToPages(5)"><span>5 items por pag</span></li>
+                                    <li ng-click="groupToPages(8)"><span>8 items por pag</span></li>
+                                    <li ng-click="groupToPages(16)">16 items por pag</li>
+                                </ul>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    Vista : {{viewMode}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-click="setViewMode(grid)"><span>Rejilla</span></li>
+                                    <li ng-click="setViewMode('table')">Tabla</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="panel-body">
+                <div ng-if="viewMode == 'grid'" class="row" >
+                    <div class="col-md-3" ng-repeat="productDTO in pagedItems[currentPage]">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a ng-href="#product/{{productDTO.product.id}}">
+                                    <div class="row">
+                                        <h4>{{productDTO.product.name}}</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="blockProduct">
+                                                <p>Precio: {{productDTO.product.price | currency:"&euro;"}}</p>
+                                                <span class="glyphicon glyphicon-time" aria-hidden="true">:{{productDTO.product.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="viewMode == 'table'" class="row">
+                    <table class="table">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Actualización</th>
+                        </tr>
+                        <tr ng-repeat="productDTO in pagedItems[currentPage]">
+                            <td>{{productDTO.product.name}}</td>
+                            <td>{{productDTO.product.price}}</td>
+                            <td>{{productDTO.product.updatedAt}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="listProductFooter">
+                <nav>
+                    <ul class="pagination ">
+                        <li ng-class="{disabled: currentPage == 0}">
+                            <a href ng-click="prevPage()">« Prev</a>
+                        </li>
+
+                        <li ng-repeat="n in range(pagedItems.length) "
+                            ng-class="{active: n == currentPage}"
+                            ng-click="setPage()">
+                            <a href ng-bind="n + 1"></a>
+                        </li>
+
+                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
+                            <a href ng-click="nextPage()">Next »</a>
+                        </li>
+                    </ul>
+                </nav></div>
             </div>
         </div>
     </div>
