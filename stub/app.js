@@ -7,6 +7,7 @@ var expressJwt = require('express-jwt');
 
 var product = require('./routes/product');
 var user = require('./routes/user');
+var ticket = require('./routes/ticket');
 
 var http = require('http');
 var path = require('path');

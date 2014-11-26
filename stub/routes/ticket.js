@@ -94,13 +94,13 @@ exports.fetchTickets = function (req, res) {
 };
 
 exports.fetchTicket = function (req, res) {
-    var id = req.param.id;
+    var id = req.params.id;
     if (id < 1 || id > TICKETS.length) return res.json(404,{msg : 'Ticket not found'});
     return res.json(200, TICKETS[id - 1]);
 };
 
 exports.fetchTicketsByClient = function (req,res){
-    var clientId = req.param.id;
+    var clientId = req.params.id;
     var result = [];
     var i=0;
     for(var idx in TICKETS){
@@ -115,7 +115,7 @@ exports.fetchTicketsByClient = function (req,res){
 };
 
 exports.fetchTicketsByInvoice = function (req,res){
-    var invoice = req.param.id;
+    var invoice = req.params.id;
     var result = [];
     var i=0;
     for(var idx in TICKETS){
@@ -145,7 +145,7 @@ exports.saveTicket = function (req,res){
 
 exports.updateTicket = function (req,res){
     var ticket = req.body;
-    var id = req.param.id;
+    var id = req.params.id;
     if (id != ticket.id) return res.json(422,{msg:'Ticket ' + ticket.id + ' is not the same'});
     if (ticket.id != "") return res.json(422,{msg:'Ticket ' + ticket.id + ' exists'});
     if (ticket.client == undefined ) return res.json(422,{msg:'not client'});
@@ -159,7 +159,7 @@ exports.updateTicket = function (req,res){
 };
 
 exports.deleteTicket = function (req,res){
-    var id = req.param.id;
+    var id = req.params.id;
     if (id < 1 || id > TICKETS.length) return res.json(404,{msg : 'Ticket not found'});
     return res.json(200);
 };

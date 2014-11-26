@@ -70,7 +70,7 @@ exports.fetchUsers = function (req, res) {
 };
 
 exports.fetchUser = function (req,res){
-    var id = req.param.id;
+    var id = req.params.id;
     if (id == undefined) return res.json(422, { error: 'The client id does not contain data.' });
     if (id < 1 || id > CLIENT.length) return res.json(422, { error: 'The client does not exist.' });
     return res.json(200, CLIENT[id-1]);
@@ -93,14 +93,14 @@ exports.saveUser = function (req,res){
 
 exports.updateUser = function (req,res){
     var user = req.body;
-    var id = req.param.id;
+    var id = req.params.id;
     if (id != user.id) res.json(400, { error: 'The client is not the same.' });
     if (id < 1 || id > CLIENT.length) res.json(404, { error: 'The client id does not exist.' });
     return res.json(200, user);
 };
 
 exports.deleteUser = function (req, res){
-    var id = req.param.id;
+    var id = req.params.id;
     if (id < 1 || id > CLIENT.length) res.json(404, { error: 'The client id does not exist.' });
     return res.json(200)
 };

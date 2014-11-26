@@ -74,14 +74,14 @@ exports.fetchProducts = function (req, res) {
 };
 
 exports.fetchProduct = function (req, res) {
-    var id = req.param.id;
+    var id = req.params.id;
     if (id == undefined){
         return res.json(422, { error: 'The product id does not contain data.' })
     }
     if (id>PRODUCTS.length || id < 1){
         return res.json(422, { error: 'The product ' + id + ' does not exist.' })
     }
-    return res.json(200, PRODUCTS[id+1]);
+    return res.json(200, PRODUCTS[id-1]);
 };
 
 exports.saveProduct = function (req, res){
@@ -112,7 +112,7 @@ exports.saveProduct = function (req, res){
 };
 
 exports.updateProduct = function (req, res) {
-    var id = req.param.id;
+    var id = req.params.id;
     var dto = req.body;
     if (id == undefined){
         return res.json(422, { error: 'The product id does not contain data.' })
