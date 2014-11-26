@@ -1,3 +1,4 @@
+module.exports = function(user) {
 "use strict";
 var jwt = require('jsonwebtoken');
 
@@ -65,18 +66,18 @@ var CLIENT = [{
     phone: [PHONE[1],PHONE[2]]
 }];
 
-exports.fetchUsers = function (req, res) {
+    module.exports.fetchUsers = function (req, res) {
     return res.json(200, CLIENT);
 };
 
-exports.fetchUser = function (req,res){
+    module.exports.fetchUser = function (req,res){
     var id = req.params.id;
     if (id == undefined) return res.json(422, { error: 'The client id does not contain data.' });
     if (id < 1 || id > CLIENT.length) return res.json(422, { error: 'The client does not exist.' });
     return res.json(200, CLIENT[id-1]);
 };
 
-exports.saveUser = function (req,res){
+    module.exports.saveUser = function (req,res){
     var user = req.body;
     if (user.id != "") res.json(422, { error: 'The client already exist.' });
     if (user.name == undefined ||
@@ -91,7 +92,7 @@ exports.saveUser = function (req,res){
     return res.json(201, user);
 };
 
-exports.updateUser = function (req,res){
+    module.exports.updateUser = function (req,res){
     var user = req.body;
     var id = req.params.id;
     if (id != user.id) res.json(400, { error: 'The client is not the same.' });
@@ -99,13 +100,13 @@ exports.updateUser = function (req,res){
     return res.json(200, user);
 };
 
-exports.deleteUser = function (req, res){
+    module.exports.deleteUser = function (req, res){
     var id = req.params.id;
     if (id < 1 || id > CLIENT.length) res.json(404, { error: 'The client id does not exist.' });
     return res.json(200)
 };
 
-exports.authenticate = function (req,res){
+    module.exports.authenticate = function (req,res){
     if (!(req.body.username === 'seik' && req.body.password === 'dseosama')) {
         res.send(401, 'Wrong user or password');
         return;
@@ -122,5 +123,8 @@ exports.authenticate = function (req,res){
     res.json({ token: token });
 };
 
+    module.exports.ADDRESS = ADDRESS;
 
+    return module.exports;
+};
 

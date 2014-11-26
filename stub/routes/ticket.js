@@ -1,3 +1,4 @@
+module.exports = function(ticket) {
 'use strict';
 
 var TICKETS_LINES = [{
@@ -89,17 +90,17 @@ var TICKETS = [{
     lines: [TICKETS_LINES[7],TICKETS_LINES[8]]
 }];
 
-exports.fetchTickets = function (req, res) {
+    module.exports.fetchTickets = function (req, res) {
     return res.json(200, TICKETS);
 };
 
-exports.fetchTicket = function (req, res) {
+    module.exports.fetchTicket = function (req, res) {
     var id = req.params.id;
     if (id < 1 || id > TICKETS.length) return res.json(404,{msg : 'Ticket not found'});
     return res.json(200, TICKETS[id - 1]);
 };
 
-exports.fetchTicketsByClient = function (req,res){
+    module.exports.fetchTicketsByClient = function (req,res){
     var clientId = req.params.id;
     var result = [];
     var i=0;
@@ -114,7 +115,7 @@ exports.fetchTicketsByClient = function (req,res){
     return res.json(404,{msg : 'Ticket not found'});
 };
 
-exports.fetchTicketsByInvoice = function (req,res){
+    module.exports.fetchTicketsByInvoice = function (req,res){
     var invoice = req.params.id;
     var result = [];
     var i=0;
@@ -129,7 +130,7 @@ exports.fetchTicketsByInvoice = function (req,res){
     return res.json(404,{msg : 'Ticket not found'});
 };
 
-exports.saveTicket = function (req,res){
+    module.exports.saveTicket = function (req,res){
     var ticket = req.body;
     if (ticket.id != "") return res.json(422,{msg:'Ticket ' + ticket.id + ' exists'});
     if (ticket.client == undefined ) return res.json(422,{msg:'not client'});
@@ -143,7 +144,7 @@ exports.saveTicket = function (req,res){
 };
 
 
-exports.updateTicket = function (req,res){
+    module.exports.updateTicket = function (req,res){
     var ticket = req.body;
     var id = req.params.id;
     if (id != ticket.id) return res.json(422,{msg:'Ticket ' + ticket.id + ' is not the same'});
@@ -158,8 +159,13 @@ exports.updateTicket = function (req,res){
     return res.json(201,ticket);
 };
 
-exports.deleteTicket = function (req,res){
+    module.exports.deleteTicket = function (req,res){
     var id = req.params.id;
     if (id < 1 || id > TICKETS.length) return res.json(404,{msg : 'Ticket not found'});
     return res.json(200);
+};
+
+module.exports.TICKETS = TICKETS;
+
+return module.exports;
 };

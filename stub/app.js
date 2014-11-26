@@ -11,7 +11,7 @@ var expressJwt = require('express-jwt');
 
 //var methodOverride = require('method-override');
 var morgan         = require('morgan');
-var errorhandler = require('errorhandler')
+//var errorhandler = require('errorhandler')
 
 
 
@@ -41,11 +41,11 @@ app.use('/rest/user', expressJwt({secret: "secret"}));
 
 var env = process.env.NODE_ENV || 'development';
 if ('development' == env) {
-    app.use(errorhandler({ dumpExceptions: true, showStack: true }));
+    //app.use(errorhandler({ dumpExceptions: true, showStack: true }));
 }
 
 if ('production' == env) {
-    app.use(errorhandler());
+    //app.use(errorhandler());
 }
 
 
