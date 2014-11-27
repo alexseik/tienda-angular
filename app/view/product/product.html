@@ -1,0 +1,45 @@
+<div header></div>
+<div class="row" >
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4><span editable-text="product.name">{{product.name}}</span><span  editable-text="product.ean13"> - {{product.ean13}}</span></h4></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">Descripción: <span editable-textarea="product.description">{{product.description || 'vacio'}}</span></div>
+                    <div class="row">PVP: <span class="" editable-text="product.pvp">{{product.pvp | currency:"&euro;"}}</span></div>
+                    <div class="row">
+                        Tipo:
+                        <span editable-select="product.typeProduct" e-ng-options="s.value as s.text for s in typeProduct">
+                            {{ showStatus() }}
+                        </span>
+                    </div>
+                    <div class="row">Fecha creacion:<span>{{product.createdAt | date : 'dd/MM/yyyy hh:mm a'}}</span> </div>
+                    <div class="row">Fecha actualizacion:<span>{{product.updatedAt | date : 'dd/MM/yyyy hh:mm a'}}</span> </div>
+                    <input type="file" ng-file-select="onFileSelect($files)"/>
+                    <i ng-hide="imageSrc">No image choosed</i>
+                    <img ng-src="{{imageSrc}}" /><br/>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-3" ng-repeat="image in product.productImages">
+                            <div class="thumbnail">
+                                <div class="holder">
+                                    <p><span class="glyphicon glyphicon-picture"></span>:{{image.id}}</p>
+                                    <p>Formato: {{image.format}}</p>
+                                    <p>Tamaño: {{image.size}}</p>
+                                    <p>{{image.updatedAt | date : 'dd/MM/yyyy hh:mm a'}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="btn-group">
+                <button type="button" class="btn btn-info">Guardar</button>
+                <button type="button" class="btn btn-info" ng-click="reset()">Restaurar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -40,7 +40,7 @@ var PRODUCTS = [{
     name : "Cuaderno",
     pvp : 2.50,
     createdAt : new Date(2013, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2013, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2013, 5, 13, 18, 30, 45),
     productImages : [IMAGES[2]]
 },{
     id : 3,
