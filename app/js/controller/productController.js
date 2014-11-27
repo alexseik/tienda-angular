@@ -1,10 +1,11 @@
-angular.module("app").controller("ProductController", function ($scope,$filter,$routeParams, ProductService, $log){
+/*global _:false*/
+angular.module("app").controller("ProductController", function ($scope,$filter,$routeParams, ProductService,FileReader, $log){
     "use strict";
     $scope.product = {
         typeProduct : null
     };
 
-    $scope.images = angular.element('files');
+    $scope.images = [];
 
     $scope.typeProduct = [
         {value: 1, text:'literatura'},
@@ -27,6 +28,7 @@ angular.module("app").controller("ProductController", function ($scope,$filter,$
 
     $scope.reset = function (){
       $scope.product = $scope.originalProduct;
+      $scope.images = [];
     };
 
     $scope.showStatus = function() {
@@ -34,11 +36,13 @@ angular.module("app").controller("ProductController", function ($scope,$filter,$
         return ($scope.product.typeProduct && selected.length) ? selected[0].text : 'vacio';
     };
 
-    $scope.updateImage = function (fileReader) {
-        //var files = element.files;
-        fileReader.readAsDataURL($scope.file, $scope).then(function(result,scope){
-           scope.imageSrc = result;
-        });
+    $scope.updateImage = function () {
+        var meter = function (result){
+            $scope.images.push(result);
+        };
+        for (var i = 0;i<$scope.files.length;i++){
+            new FileReader(this.files[i], this).then(meter);
+        }
     };
 
 });

@@ -1,6 +1,8 @@
-(function (module) {
+/* global FileReader */
 
-    var fileReader = function ($q, $log) {
+angular.module("app").factory ("FileReader",["$q", "$log",function readAsDataURL2($q,$log){
+        "use strict";
+
 
         var onLoad = function(reader, deferred, scope) {
             return function () {
@@ -36,7 +38,7 @@
             return reader;
         };
 
-        var readAsDataURL = function (file, scope) {
+        return function (file, scope) {
             var deferred = $q.defer();
 
             var reader = getReader(deferred, scope);
@@ -45,12 +47,4 @@
             return deferred.promise;
         };
 
-        return {
-            readAsDataUrl: readAsDataURL
-        };
-    };
-
-    module.factory("FileReader",
-        ["$q", "$log", fileReader]);
-
-}(angular.module("app")));
+}]);
