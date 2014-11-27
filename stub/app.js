@@ -11,13 +11,14 @@ var expressJwt = require('express-jwt');
 
 //var methodOverride = require('method-override');
 var morgan         = require('morgan');
-var errorhandler = require('errorhandler')
+//var errorhandler = require('errorhandler')
 
 
 
 var product = require('./routes/product');
 var user = require('./routes/user');
 var ticket = require('./routes/ticket');
+var invoice = require('./routes/invoice');
 
 var router = express.Router();
 var app = express();
@@ -40,11 +41,11 @@ app.use('/rest/user', expressJwt({secret: "secret"}));
 
 var env = process.env.NODE_ENV || 'development';
 if ('development' == env) {
-    app.use(errorhandler({ dumpExceptions: true, showStack: true }));
+    //app.use(errorhandler({ dumpExceptions: true, showStack: true }));
 }
 
 if ('production' == env) {
-    app.use(errorhandler());
+    //app.use(errorhandler());
 }
 
 
@@ -86,6 +87,14 @@ router.get('/rest/invoice/:id/ticket', ticket.fetchTicketsByInvoice);
 router.post('/rest/ticket', ticket.saveTicket);
 router.put('/rest/ticket/:id', ticket.updateTicket);
 router.delete('/rest/ticket/:id',ticket.deleteTicket);
+
+
+//Invoice rest api
+router.get('/rest/invoice', invoice.fetchInvoices);
+router.get('/rest/invoice/:id', invoice.fetchInvoice);
+router.post('/rest/invoice', invoice.saveInvoice);
+router.put('/rest/invoice/:id', invoice.updateInvoice);
+router.delete('/rest/invoice/:id', invoice.deleteInvoice);
 
 app.use('/', router);
 
