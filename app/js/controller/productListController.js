@@ -4,7 +4,16 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
     $scope.itemsPerPage = 8;
     $scope.pagedItems = [];
     $scope.currentPage = 0;
-    $scope.viewMode = 'grid';
+    $scope.viewMode = 'table';
+
+    $scope.typeProduct = [
+        {value: 1, text:'literatura'},
+        {value: 2, text:'texto'},
+        {value: 3, text:'material'},
+        {value: 4, text:'cuadernillo'},
+        {value: 5, text:'novela'},
+        {value: 6, text:'literatura infantil'}
+    ];
 
 
     ProductService.list()

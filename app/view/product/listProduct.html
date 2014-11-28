@@ -4,22 +4,32 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-3 col-xs-12">
                         <div class="titlePanel">
                             Lista de Productos
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-9 col-xs-12">
                         <div class="listProductMenu">
+                            <div class="btn-group" role="group">
+                                <span>Nombre: <input type="text" ng-model="search.name"/></span>
+                                <span>Ean13: <input type="text" ng-model="search.ean13"/></span>
+                                <div class="mySelect">
+                                    <select title="Tipo de producto" class="form-control"  ng-model="search.typeProduct">
+                                        <option></option>
+                                        <option ng-repeat="type in typeProduct">{{type.text}}</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                     Num Items {{itemsPerPage}}
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li ng-click="groupToPages(5)"><span>5 items por pag</span></li>
-                                    <li ng-click="groupToPages(8)"><span>8 items por pag</span></li>
-                                    <li ng-click="groupToPages(16)">16 items por pag</li>
+                                    <li ng-click="groupToPages(8)"><span>ver 8</span></li>
+                                    <li ng-click="groupToPages(16)"><span>ver 16</span></li>
+                                    <li ng-click="groupToPages(32)">ver 32</li>
                                 </ul>
                             </div>
                             <div class="btn-group" role="group">
@@ -38,38 +48,48 @@
             </div>
             <div class="panel-body">
                 <div ng-if="viewMode == 'grid'" class="row" >
-                    <div class="col-md-3" ng-repeat="product in pagedItems[currentPage]">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <a ng-href="#product/{{product.id}}">
-                                    <div class="row">
-                                        <h4>{{product.name}}</h4>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="blockProduct">
-                                                <h6>{{product.ean13}}</h6>
-                                                <p>Precio: {{product.pvp | currency:"&euro;"}}</p>
-                                                <span class="glyphicon glyphicon-time" aria-hidden="true">:{{product.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6"></div>
-                                    </div>
-                                </a>
+                    <div class="col-md-3 col-xs-6" ng-repeat="product in pagedItems[currentPage] | filter:search">
+                            <div class="row">
+                                <a ng-href="#product/{{product.id}}"><h4>{{product.name}}</h4></a>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="blockProduct">
+                                        <h6>{{product.ean13}}</h6>
+                                        <p>Tipo: {{product.typeProduct}}</p>
+                                        <p>Precio: {{product.pvp | currency:"&euro;"}}</p>
+                                        <span class="glyphicon glyphicon-time" aria-hidden="true">:{{product.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="thumbnail">
+                                        <div class="holder">
+                                            <p><span class="glyphicon glyphicon-picture"></span>:{{product.productImages[0].id}}</p>
+                                            <p>Formato: {{product.productImages[0].format}}</p>
+                                            <p>Tamaño: {{product.productImages[0].size}}</p>
+                                            <p>{{product.productImages[0].updatedAt | date : 'dd/MM/yyyy hh:mm a'}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
                 <div ng-if="viewMode == 'table'" class="row">
                     <table class="table">
                         <tr>
                             <th>Nombre</th>
+                            <th>EAN13</th>
+                            <th>Tipo Producto</th>
                             <th>Precio</th>
-                            <th>Actualización</th>
+                            <th>Creado</th>
+                            <th>Actualizado</th>
                         </tr>
-                        <tr ng-repeat="product in pagedItems[currentPage]">
+                        <tr ng-repeat="product in pagedItems[currentPage] | filter:search">
                             <td><a ng-href="#product/{{product.id}}">{{product.name}}</a></td>
+                            <td><a ng-href="#product/{{product.id}}">{{product.ean13}}</a></td>
+                            <td>{{product.typeProduct}}</td>
                             <td>{{product.pvp  | currency:"&euro;"}}</td>
+                            <td>{{product.createdAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
                             <td>{{product.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
                         </tr>
                     </table>

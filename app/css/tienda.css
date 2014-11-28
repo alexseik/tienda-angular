@@ -49,3 +49,8 @@ img {
 .btn-image{
     border: 10px groove #555;
 }
+
+.mySelect{
+    float:right;
+    margin-left: 5px;
+}
