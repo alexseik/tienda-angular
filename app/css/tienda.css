@@ -55,6 +55,13 @@ img {
     margin-left: 5px;
 }
 
+.noImage{
+    color : #ccc;
+    font-size: 60px;
+    text-align: center;
+    margin:20%;
+}
+
 .borrarImagen{
     color : #ccc;
     opacity: 0.5;
@@ -66,4 +73,13 @@ img {
 .borrarImagen:hover{
     opacity: 1;
     color: red;
+}
+
+.txtListProduct{
+    font-family: "Arial";
+    color: blue;
+}
+
+.productBox{
+    min-height: 200px;
 }

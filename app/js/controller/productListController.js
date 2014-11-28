@@ -4,9 +4,11 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
     $scope.itemsPerPage = 8;
     $scope.pagedItems = [];
     $scope.currentPage = 0;
-    $scope.viewMode = 'table';
+    $scope.viewMode = 'grid';
 
     $scope.typeProduct = serverConstants.typeProduct;
+
+    $scope.baseImageRoute = serverConstants.baseUrl+'/product/';
 
     ProductService.list()
         .success(function (data) {
@@ -38,7 +40,7 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
 
     $scope.setViewMode = function (mode){
         if (mode === 'table'){
-            $scope.viewMode = mode;
+            $scope.viewMode = 'table';
         }
         else {
             $scope.viewMode = 'grid';

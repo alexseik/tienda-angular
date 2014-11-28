@@ -9,7 +9,7 @@ angular.module("app").controller("ProductController", function ($scope,$filter,$
 
     $scope.typeProduct = serverConstants.typeProduct;
 
-    $scope.baseImageRoute = serverConstants.baseUrl;
+    $scope.baseImageRoute = serverConstants.baseUrl+'/product/';
 
     ProductService.getId($routeParams.id)
         .success(function (data) {
@@ -42,10 +42,10 @@ angular.module("app").controller("ProductController", function ($scope,$filter,$
 
     $scope.deleteOldImage = function (index){
         $scope.product.productImages.splice(index,1);
-    }
+    };
 
     $scope.deleteNewImage = function (index){
         $scope.images.splice(index,1);
-    }
+    };
 
 });
