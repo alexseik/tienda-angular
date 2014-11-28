@@ -65,11 +65,13 @@ router.options('*', function(req, res) {
 });
 
 //Routes
+//Product rest api
 router.get('/rest/product', product.fetchProducts);
 router.get('/rest/product/:id', product.fetchProduct);
 router.post('/rest/product', product.saveProduct);
 router.put('/rest/product/:id', product.updateProduct);
 router.delete('/rest/product/:id', product.deleteProduct);
+router.get('/rest/product/:id/image/:id', product.fetchImageOfProduct);
 
 router.get('/rest/user', user.fetchUsers);
 router.get('/rest/user/:id', user.fetchUser);

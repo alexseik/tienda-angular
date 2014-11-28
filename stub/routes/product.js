@@ -1,30 +1,6 @@
 "use strict";
 
-var IMAGES = [{
-    id : 1,
-    createdAt : new Date(2014, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-    route : "/product/1/img_boli1.jpg",
-    size : 35,
-    format : "JPG",
-    product : 1
-},{
-    id : 2,
-    createdAt : new Date(2014, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-    route : "/product/1/img_boli2.jpg",
-    size : 58,
-    format : "JPG",
-    product : 1
-},{
-    id : 3,
-    createdAt : new Date(2014, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-    route : "/product/2/img_Cuaderno1.jpg",
-    size : 40,
-    format : "JPG",
-    product : 2
-}];
+var images = require('./images.js')(images);
 
 var PRODUCTS = [{
     id : 1,
@@ -33,7 +9,7 @@ var PRODUCTS = [{
     pvp : 0.50,
     createdAt : new Date(2014, 5, 13, 9, 30, 45),
     updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-    productImages : [IMAGES[0],IMAGES[1]]
+    productImages : [images.IMAGES[0],images.IMAGES[1]]
 },{
     id : 2,
     ean13 : 9876543213212,
@@ -41,7 +17,7 @@ var PRODUCTS = [{
     pvp : 2.50,
     createdAt : new Date(2013, 5, 13, 9, 30, 45),
     updatedAt : new Date(2013, 5, 13, 18, 30, 45),
-    productImages : [IMAGES[2]]
+    productImages : [images.IMAGES[2]]
 },{
     id : 3,
     name : "Libro",
@@ -155,3 +131,25 @@ exports.deleteProduct = function (req, res){
 
     return res.json(200);
 };
+
+exports.fetchImageOfProduct = function (req, res){
+
+    var options = {
+        root: __dirname + '/data/',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
+    var fileName ='libro.jpg';
+    res.contentType('image/jpeg');
+    res.sendFile(fileName, options, function (err) {
+        if (err) {
+            console.log(err);
+            res.status(err.status).end();
+        }
+        else {
+            console.log('Sent:', fileName);
+        }
+    });
+}
