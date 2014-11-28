@@ -39,10 +39,7 @@
                         <div class="col-md-4" ng-repeat="image in product.productImages">
                             <div class="thumbnail">
                                 <div class="holder">
-                                    <p><span class="glyphicon glyphicon-picture"></span>:{{image.id}}</p>
-                                    <p>Formato: {{image.format}}</p>
-                                    <p>Tamaño: {{image.size}}</p>
-                                    <p>{{image.updatedAt | date : 'dd/MM/yyyy hh:mm a'}}</p>
+                                    <img src="{{baseImageRoute+image.route}}" />
                                 </div>
                             </div>
                         </div>

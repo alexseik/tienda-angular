@@ -9,6 +9,8 @@ angular.module("app").controller("ProductController", function ($scope,$filter,$
 
     $scope.typeProduct = serverConstants.typeProduct;
 
+    $scope.baseImageRoute = serverConstants.baseUrl;
+
     ProductService.getId($routeParams.id)
         .success(function (data) {
             $scope.product = data;
