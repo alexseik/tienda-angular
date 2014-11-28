@@ -35,21 +35,23 @@
                 </div>
                 <div class="col-md-6">
                     <div class="row">
-                        <h6>Imagenes existentes</h6>
+                        <h4>Imagenes existentes</h4>
                         <div class="col-md-4" ng-repeat="image in product.productImages">
                             <div class="thumbnail">
                                 <div class="holder">
+                                    <span ng-click="deleteOldImage($index)" class="glyphicon glyphicon-remove-circle borrarImagen"></span>
                                     <img src="{{baseImageRoute+image.route}}" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <h6>Imagenes para subir</h6>
+                        <h4>Imagenes para subir</h4>
                         <div class="col-md-4" ng-repeat="image in images">
 
                             <div class="thumbnail">
                                 <div class="holder">
+                                    <span ng-click="deleteNewImage($index)" class="glyphicon glyphicon-remove-circle borrarImagen"></span>
                                     <img ng-src="{{image}}" />
                                 </div>
                             </div>

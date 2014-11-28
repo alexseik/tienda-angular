@@ -40,4 +40,12 @@ angular.module("app").controller("ProductController", function ($scope,$filter,$
         }
     };
 
+    $scope.deleteOldImage = function (index){
+        $scope.product.productImages.splice(index,1);
+    }
+
+    $scope.deleteNewImage = function (index){
+        $scope.images.splice(index,1);
+    }
+
 });
