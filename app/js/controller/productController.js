@@ -1,5 +1,5 @@
 /*global _:false*/
-angular.module("app").controller("ProductController", function ($scope,$filter,$routeParams, ProductService,FileReader, $log){
+angular.module("app").controller("ProductController", function ($scope,$filter,$routeParams, ProductService,FileReader,serverConstants, $log){
     "use strict";
     $scope.product = {
         typeProduct : null
@@ -7,14 +7,7 @@ angular.module("app").controller("ProductController", function ($scope,$filter,$
 
     $scope.images = [];
 
-    $scope.typeProduct = [
-        {value: 1, text:'literatura'},
-        {value: 2, text:'texto'},
-        {value: 3, text:'material'},
-        {value: 4, text:'cuadernillo'},
-        {value: 5, text:'novela'},
-        {value: 6, text:'literatura infantil'}
-    ];
+    $scope.typeProduct = serverConstants.typeProduct;
 
     ProductService.getId($routeParams.id)
         .success(function (data) {

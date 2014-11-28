@@ -1,4 +1,4 @@
-angular.module("app").controller("ProductListController", function ($scope, $routeParams, ProductService, $log) {
+angular.module("app").controller("ProductListController", function ($scope, $routeParams, ProductService,serverConstants, $log) {
     "use strict";
 
     $scope.itemsPerPage = 8;
@@ -6,15 +6,7 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
     $scope.currentPage = 0;
     $scope.viewMode = 'table';
 
-    $scope.typeProduct = [
-        {value: 1, text:'literatura'},
-        {value: 2, text:'texto'},
-        {value: 3, text:'material'},
-        {value: 4, text:'cuadernillo'},
-        {value: 5, text:'novela'},
-        {value: 6, text:'literatura infantil'}
-    ];
-
+    $scope.typeProduct = serverConstants.typeProduct;
 
     ProductService.list()
         .success(function (data) {
@@ -76,5 +68,9 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
 
     $scope.setPage = function () {
         $scope.currentPage = this.n;
+    };
+
+    $scope.resetTypeProductFilter = function(){
+        $scope.search = undefined;
     };
 });

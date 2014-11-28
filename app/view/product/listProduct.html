@@ -15,9 +15,9 @@
                                 <span>Nombre: <input type="text" ng-model="search.name"/></span>
                                 <span>Ean13: <input type="text" ng-model="search.ean13"/></span>
                                 <div class="mySelect">
-                                    <select title="Tipo de producto" class="form-control"  ng-model="search.typeProduct">
-                                        <option></option>
-                                        <option ng-repeat="type in typeProduct">{{type.text}}</option>
+                                    <select title="Tipo de producto" class="form-control" ng-model="search.typeProduct"
+                                            ng-required="true" ng-options="type.text for type in typeProduct">
+                                        <option value="">-- tipo producto --</option>
                                     </select>
                                 </div>
                             </div>
