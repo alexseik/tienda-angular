@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute']);
+var app = angular.module("app", ['ngRoute','xeditable']);
 
 app.config(function ($routeProvider) {
     "use strict";
@@ -13,6 +13,10 @@ app.config(function ($routeProvider) {
     when("/listProducts",{
        templateUrl: "../view/product/listProduct.html",
         controller: "ProductListController"
+    }).
+    when("/product/:id",{
+        templateUrl: "../view/product/product.html",
+        controller: "ProductController"
     }).
     otherwise({
         redirectTo: "/home"

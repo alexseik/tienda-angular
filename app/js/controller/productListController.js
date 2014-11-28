@@ -1,4 +1,4 @@
-angular.module("app").controller("ProductListController", function ($scope, $routeParams, ProductService, $log) {
+angular.module("app").controller("ProductListController", function ($scope, $routeParams, ProductService,serverConstants, $log) {
     "use strict";
 
     $scope.itemsPerPage = 8;
@@ -6,6 +6,9 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
     $scope.currentPage = 0;
     $scope.viewMode = 'grid';
 
+    $scope.typeProduct = serverConstants.typeProduct;
+
+    $scope.baseImageRoute = serverConstants.baseUrl+'/product/';
 
     ProductService.list()
         .success(function (data) {
@@ -37,7 +40,7 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
 
     $scope.setViewMode = function (mode){
         if (mode === 'table'){
-            $scope.viewMode = mode;
+            $scope.viewMode = 'table';
         }
         else {
             $scope.viewMode = 'grid';
@@ -67,5 +70,9 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
 
     $scope.setPage = function () {
         $scope.currentPage = this.n;
+    };
+
+    $scope.resetTypeProductFilter = function(){
+        $scope.search = undefined;
     };
 });

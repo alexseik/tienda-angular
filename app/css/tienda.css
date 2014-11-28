@@ -32,6 +32,54 @@ div.listProductFooter{
 }
 
 div.panel-body{
+    font-family: "Courier";
     margin-left: 5px;
     margin-right: 5px;
+}
+
+.holder { border: 3px dashed #ccc; width: 100%; height: 100%; margin: auto;}
+.holder:hover { border: 3px dashed #333; }
+
+img {
+    max-width: 100%;
+    height: auto;
+    /*width: auto/9; /* Bug de ie8 */
+}
+
+.btn-image{
+    border: 10px groove #555;
+}
+
+.mySelect{
+    float:right;
+    margin-left: 5px;
+}
+
+.noImage{
+    color : #ccc;
+    font-size: 60px;
+    text-align: center;
+    margin:20%;
+}
+
+.borrarImagen{
+    color : #ccc;
+    opacity: 0.5;
+    position : absolute;
+    right: 5px;
+    font-size: 50px;
+}
+
+.borrarImagen:hover{
+    opacity: 1;
+    color: red;
+}
+
+.txtListProduct{
+    font-family: "Arial";
+    color: blue;
+}
+
+.productBox{
+    min-height: 200px;
 }

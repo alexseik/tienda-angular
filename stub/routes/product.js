@@ -1,52 +1,31 @@
 "use strict";
 
-var IMAGES = [{
-    id : 1,
-    createdAt : new Date(2014, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-    route : "/product/1/img_boli1.jpg",
-    size : 35,
-    format : "JPG",
-    product : 1
-},{
-    id : 2,
-    createdAt : new Date(2014, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-    route : "/product/1/img_boli2.jpg",
-    size : 58,
-    format : "JPG",
-    product : 1
-},{
-    id : 3,
-    createdAt : new Date(2014, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-    route : "/product/2/img_Cuaderno1.jpg",
-    size : 40,
-    format : "JPG",
-    product : 2
-}];
+var images = require('./images.js')(images);
 
 var PRODUCTS = [{
     id : 1,
     ean13 : 9876543213211,
     name : "Bolígrafo",
     pvp : 0.50,
+    typeProduct : "",
     createdAt : new Date(2014, 5, 13, 9, 30, 45),
     updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-    productImages : [IMAGES[0],IMAGES[1]]
+    productImages : [images.IMAGES[1],images.IMAGES[0]]
 },{
     id : 2,
     ean13 : 9876543213212,
     name : "Cuaderno",
     pvp : 2.50,
+    typeProduct : "",
     createdAt : new Date(2013, 5, 13, 9, 30, 45),
-    updatedAt : new Date(2013, 5, 13, 9, 30, 45),
-    productImages : [IMAGES[2]]
+    updatedAt : new Date(2013, 5, 13, 18, 30, 45),
+    productImages : [images.IMAGES[2]]
 },{
     id : 3,
     name : "Libro",
     ean13 : 9876543213213,
     pvp : 17.50,
+    typeProduct : "",
     createdAt : new Date(2012, 5, 13, 9, 30, 45),
     updatedAt : new Date(2012, 5, 13, 9, 30, 45),
     productImages : null
@@ -55,22 +34,169 @@ var PRODUCTS = [{
     name : "Funda",
     ean13 : 9876543213214,
     pvp : 0.30,
+    typeProduct : "",
     createdAt : new Date(2012, 5, 13, 9, 30, 45),
     updatedAt : new Date(2012, 5, 13, 9, 30, 45),
-    productImages : null
+    productImages : [images.IMAGES[1]]
 },{
     id : 5,
     ean13 : 9876543213215,
     name : "Block dibujo",
     pvp : 3.30,
+    typeProduct : "",
     createdAt : new Date(2012, 5, 13, 9, 30, 45),
     updatedAt : new Date(2012, 5, 13, 9, 30, 45),
     productImages : null
 },{
-    id : 6,
+    id : 7,
     ean13 : 9876543213215,
     name : "Block dibujo carboncillo DinA3",
     pvp : 3.30,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 8,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 9,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : [images.IMAGES[2]]
+},{
+    id : 10,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : [images.IMAGES[0]]
+},{
+    id : 11,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 12,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 13,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 14,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 15,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 16,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 17,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct: "material",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 18,
+    ean13 : 9876543213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct: "material",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 19,
+    ean13 : 9876567213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct: "material",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 20,
+    ean13 : 9876510213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct: "material",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 21,
+    ean13 : 9876512213215,
+    name : "Block dibujo carboncillo DinA3",
+    pvp : 3.30,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 22,
+    ean13 : 9876534213215,
+    name : "Toner blanco epson",
+    pvp : 20.80,
+    typeProduct : "",
+    createdAt : new Date(2012, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2012, 5, 13, 9, 30, 45),
+    productImages : null
+},{
+    id : 23,
+    ean13 : 9876587213215,
+    name : "Manta cubre coche",
+    pvp : 3.30,
+    typeProduct : "",
     createdAt : new Date(2012, 5, 13, 9, 30, 45),
     updatedAt : new Date(2012, 5, 13, 9, 30, 45),
     productImages : null
@@ -155,3 +281,34 @@ exports.deleteProduct = function (req, res){
 
     return res.json(200);
 };
+
+exports.fetchImageOfProduct = function (req, res){
+
+    var options = {
+        root: __dirname + '/data/',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
+    var fileName ='libro.jpg';
+    var id = req.params.id;
+    if (id % 2 == 0){
+        fileName ='libro.jpg';
+        res.contentType('image/jpeg');
+    }
+    else{
+        fileName ='libro2.png';
+        res.contentType('image/png');
+    }
+    res.contentType('image/jpeg');
+    res.sendFile(fileName, options, function (err) {
+        if (err) {
+            console.log(err);
+            res.status(err.status).end();
+        }
+        else {
+            console.log('Sent:', fileName);
+        }
+    });
+}
