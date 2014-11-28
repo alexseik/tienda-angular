@@ -142,6 +142,15 @@ exports.fetchImageOfProduct = function (req, res){
         }
     };
     var fileName ='libro.jpg';
+    var id = req.params.id;
+    if (id % 2 == 0){
+        fileName ='libro.jpg';
+        res.contentType('image/jpeg');
+    }
+    else{
+        fileName ='libro2.png';
+        res.contentType('image/png');
+    }
     res.contentType('image/jpeg');
     res.sendFile(fileName, options, function (err) {
         if (err) {
