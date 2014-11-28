@@ -5,7 +5,7 @@ module.exports = function(images) {
         id : 1,
         createdAt : new Date(2014, 5, 13, 9, 30, 45),
         updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-        route : "/product/1/image/1",
+        route : "/image/1",
         size : 35,
         format : "JPG",
         product : 1
@@ -13,7 +13,7 @@ module.exports = function(images) {
         id : 2,
         createdAt : new Date(2014, 5, 13, 9, 30, 45),
         updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-        route : "/product/1/image/2",
+        route : "/image/2",
         size : 58,
         format : "JPG",
         product : 1
@@ -21,7 +21,7 @@ module.exports = function(images) {
         id : 3,
         createdAt : new Date(2014, 5, 13, 9, 30, 45),
         updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-        route : "/product/2/image/3",
+        route : "/image/3",
         size : 40,
         format : "JPG",
         product : 2

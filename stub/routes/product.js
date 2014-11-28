@@ -10,7 +10,7 @@ var PRODUCTS = [{
     typeProduct : "",
     createdAt : new Date(2014, 5, 13, 9, 30, 45),
     updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-    productImages : [images.IMAGES[0],images.IMAGES[1]]
+    productImages : [images.IMAGES[1],images.IMAGES[0]]
 },{
     id : 2,
     ean13 : 9876543213212,
@@ -37,7 +37,7 @@ var PRODUCTS = [{
     typeProduct : "",
     createdAt : new Date(2012, 5, 13, 9, 30, 45),
     updatedAt : new Date(2012, 5, 13, 9, 30, 45),
-    productImages : null
+    productImages : [images.IMAGES[1]]
 },{
     id : 5,
     ean13 : 9876543213215,
@@ -73,7 +73,7 @@ var PRODUCTS = [{
     typeProduct : "",
     createdAt : new Date(2012, 5, 13, 9, 30, 45),
     updatedAt : new Date(2012, 5, 13, 9, 30, 45),
-    productImages : null
+    productImages : [images.IMAGES[2]]
 },{
     id : 10,
     ean13 : 9876543213215,
@@ -82,7 +82,7 @@ var PRODUCTS = [{
     typeProduct : "",
     createdAt : new Date(2012, 5, 13, 9, 30, 45),
     updatedAt : new Date(2012, 5, 13, 9, 30, 45),
-    productImages : null
+    productImages : [images.IMAGES[0]]
 },{
     id : 11,
     ean13 : 9876543213215,
