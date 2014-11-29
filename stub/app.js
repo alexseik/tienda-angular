@@ -37,7 +37,7 @@ var router = express.Router();
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/rest/user', expressJwt({secret: "secret"}));
+//app.use('/rest/user', expressJwt({secret: "secret"}));
 
 var env = process.env.NODE_ENV || 'development';
 if ('development' == env) {
