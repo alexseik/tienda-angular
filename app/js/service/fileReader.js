@@ -1,6 +1,6 @@
 /* global FileReader */
 
-angular.module("app").factory ("FileReader",["$q", "$log",function readAsDataURL2($q,$log){
+angular.module("app").factory ("FileReader",["$q", "$log",function ($q,$log){
         "use strict";
 
 
