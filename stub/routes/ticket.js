@@ -87,7 +87,7 @@ var TICKETS = [{
     updatedAt : new Date(2014, 9, 10, 9, 30, 45),
     client : 2,
     invoice : 2,
-    lines: [TICKETS_LINES[7],TICKETS_LINES[8]]
+    lines: [TICKETS_LINES[7]]
 }];
 
     module.exports.fetchTickets = function (req, res) {
