@@ -18,6 +18,10 @@ app.config(function ($routeProvider) {
         templateUrl: "../view/product/product.html",
         controller: "ProductController"
     }).
+    when("/client/:id",{
+        templateUrl: "../view/client/client.html",
+        controller: "ClientController"
+    }).
     when("/listTickets",{
         templateUrl: "../view/ticket/listTicket.html",
         controller: "TicketListController"

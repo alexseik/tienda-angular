@@ -83,3 +83,7 @@ img {
 .productBox{
     min-height: 200px;
 }
+
+.indentText{
+    margin-left: 5px;
+}

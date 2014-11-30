@@ -18,8 +18,8 @@
                 </tr>
                 <tr ng-repeat="ticket in ticketList">
                     <td><a ng-href="#ticket/{{ticket.id}}">{{ticket.id}}</a></td>
-                    <td><a ng-href="#user/{{ticket.client.id}}">{{ticket.client.name}}</a></td>
-                    <td><a ng-href="#user/{{ticket.invoice}}">{{ticket.invoice}}</a></td>
+                    <td><a ng-href="#client/{{ticket.client.id}}">{{ticket.client.name}}</a></td>
+                    <td><a ng-href="#invoice/{{ticket.invoice}}">{{ticket.invoice}}</a></td>
                     <td>{{ticket.total  | currency:"&euro;"}}</td>
                     <td>{{ticket.createdAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
                     <td>{{ticket.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
