@@ -1,0 +1,77 @@
+<div header></div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+            <span>[{{client.id}}]</span>
+            <span editable-text="client.name">{{client.name}}</span>
+        </h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">Nif: <span class="" editable-text="client.nif">{{client.nif}}</span></div>
+                <div class="row">Email: <span class="" editable-text="client.email">{{client.email}}</span></div>
+                <div class="row" ng-repeat="address in client.address">
+                    <h6>Dirección {{$index +1}}:</h6>
+                    <span class="indentText" editable-text="client.address[$index].street">{{address.street}}</span>,
+                    <span class="indentText" editable-text="client.address[$index].number">{{address.number}}</span><br/>
+                    <span class="indentText" editable-text="client.address[$index].locationDetail">{{address.locationDetail}}</span><br/>
+                    <span class="indentText">CP :</span><span editable-text="client.address[$index].postalCode">{{address.postalCode}}</span><br/>
+                    <span class="indentText">Ciudad :</span><span class="indentText" editable-text="client.address[$index].city">{{address.city}}</span><br/>
+                    <span class="indentText">Provincia :</span><span class="indentText" editable-text="client.address[$index].province">{{address.province}}</span><br/>
+                    <span class="indentText">Pais :</span><span class="indentText" editable-text="client.address[$index].country">{{address.country}}</span><br/>
+                </div>
+                <br/>
+                <div class="row" ng-repeat="phone in client.phone">
+                    <span>[{{$index}}]:</span>
+                    <span class="" editable-text="client.phone[$index].number">{{phone.number}}</span>
+                    (<span class="" editable-text="client.phone[$index].description">{{phone.description}}</span>)
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <h4>Tickets</h4>
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Factura</th>
+                            <th>Total</th>
+                            <th>Creado</th>
+                            <th>Actualizado</th>
+                        </tr>
+                        <tr ng-repeat="ticket in tickets">
+                            <td><a ng-href="#ticket/{{ticket.id}}">{{ticket.id}}</a></td>
+                            <td><a ng-href="#invoice/{{ticket.invoice}}">{{ticket.invoice}}</a></td>
+                            <td>{{ticket.total  | currency:"&euro;"}}</td>
+                            <td>{{ticket.createdAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
+                            <td>{{ticket.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
+                            <td><span class="glyphicon glyphicon-pencil"></span> - <span class="glyphicon glyphicon-ok"></span></td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="">
+                        <nav>
+                            <ul class="pagination">
+                                <li ng-class="{disabled: ticketsCurrentPage == 0}">
+                                    <a href ng-click="ticketsPrevPage()">« Prev</a>
+                                </li>
+
+                                <li ng-repeat="n in ticketsRange(pagedTickets.length) "
+                                    ng-class="{active: n == ticketsCurrentPage}"
+                                    ng-click="ticketsSetPage()">
+                                    <a href ng-bind="n + 1"></a>
+                                </li>
+
+                                <li ng-class="{disabled: (ticketsCurrentPage) == pagedTickets.length - 1}">
+                                    <a href ng-click="ticketsNextPage()">Next »</a>
+                                </li>
+                            </ul>
+                        </nav></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer"></div>
+</div>

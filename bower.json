@@ -12,6 +12,7 @@
     "underscore": "~1.6.0",
     "jquery": "~2.1.0",
     "vex": "2.0.2",
-    "angular-xeditable": "*"
+    "angular-xeditable": "*",
+    "angular-utils-pagination":"*"
   }
 }

@@ -1,0 +1,34 @@
+<div header></div>
+<div class="row" >
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="titlePanel">
+                Lista de Tickets
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Factura</th>
+                    <th>Total</th>
+                    <th>Creado</th>
+                    <th>Actualizado</th>
+                </tr>
+                <tr ng-repeat="ticket in ticketList">
+                    <td><a ng-href="#ticket/{{ticket.id}}">{{ticket.id}}</a></td>
+                    <td><a ng-href="#client/{{ticket.client.id}}">{{ticket.client.name}}</a></td>
+                    <td><a ng-href="#invoice/{{ticket.invoice}}">{{ticket.invoice}}</a></td>
+                    <td>{{ticket.total  | currency:"&euro;"}}</td>
+                    <td>{{ticket.createdAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
+                    <td>{{ticket.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
+                    <td><span class="glyphicon glyphicon-pencil"></span></td>
+                    <td><span class="glyphicon glyphicon-remove"></span></td>
+                    <td><span class="glyphicon glyphicon-ok"></span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-footer"></div>
+    </div>
+</div>

@@ -63,10 +63,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="thumbnail">
-                                        <img ng-if="product.productImages[0]" src="{{baseImageRoute+product.id+product.productImages[0].route}}" />
+                                        <a ng-href="#product/{{product.id}}">
+                                        <img ng-if="product.productImages[0]" ng-src="{{baseImageRoute+product.id+product.productImages[0].route}}" />
                                         <div ng-if="product.productImages[0] == undefined" class="holder">
                                             <span  class="glyphicon glyphicon-picture noImage"></span>
                                         </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
