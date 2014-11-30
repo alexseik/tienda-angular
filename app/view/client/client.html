@@ -30,6 +30,7 @@
             </div>
             <div class="col-md-8">
                 <div class="row">
+                    <h4>Tickets</h4>
                     <table class="table">
                         <tr>
                             <th>ID</th>
@@ -44,9 +45,8 @@
                             <td>{{ticket.total  | currency:"&euro;"}}</td>
                             <td>{{ticket.createdAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
                             <td>{{ticket.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
-                            <td><span class="glyphicon glyphicon-pencil"></span></td>
-                            <td><span class="glyphicon glyphicon-remove"></span></td>
-                            <td><span class="glyphicon glyphicon-ok"></span></td>
+                            <td><span class="glyphicon glyphicon-pencil"></span> - <span class="glyphicon glyphicon-ok"></span></td>
+
                         </tr>
                     </table>
                 </div>

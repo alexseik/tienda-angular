@@ -1,0 +1,57 @@
+<div header></div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+            <span  style="padding-top: 5px;">ID: </span>
+            <span class="label label-default">{{ticket.id}}</span>
+            <div style="float:right;">
+                <span  style="padding-top: 0px;">Cliente:</span> <span style="margin-right: 15px;"><a ng-href="#client/{{ticket.client.id}}">{{ticket.client.name}}</a></span>
+                <span  style="padding-top: 5px;">Descuento:</span> <span class="label label-default" style="margin-right: 15px;">{{ticket.descountTotal | currency:"&euro;"}}</span>
+                <span  style="padding-top: 5px;">Bruto:</span><span class="label label-default" style="margin-right: 15px;">{{ticket.total | currency:"&euro;"}}</span>
+                <span  style="padding-top: 5px;">Neto:</span> <span class="label label-info" style="margin-right: 15px;">{{ticket.neto | currency:"&euro;"}}</span>
+            </div>
+        </h4>
+    </div>
+    <div class="panel-body">
+        <div class="row"></div>
+        <div class="row">
+            <h4>Lineas</h4>
+            <table class="table">
+                <tr>
+                    <th>ean13</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio U</th>
+                    <th>Actualizado</th>
+                    <th>Total</th>
+                    <th>Tax</th>
+                    <th>Descuento</th>
+                    <th>Acciones</th>
+                </tr>
+                <tr ng-repeat="line in ticket.lines">
+                    <td ng-if="line.product.ean13 != undefined"><a ng-href="#product/{{line.product.id}}">{{line.product.ean13}}</a></td>
+                    <td ng-if="line.product.ean13 == undefined"><input type="text" value="" autofocus="true"/></td>
+                    <td><span class="" editable-text="line.product.name">{{line.product.name || 'vacio'}}</span></td>
+                    <td><span class="" editable-text="line.quantity" e-onChange="{{recalculateTotal()}}">{{line.quantity}}</span></td>
+                    <td><span class="" editable-text="line.unitPrice" e-onChange="{{recalculateTotal()}}">{{line.unitPrice  | currency:"&euro;"}}</span></td>
+                    <td><span>{{line.updatedAt  || 'no guardado'| date : 'dd/MM/yyyy' : 'UTC'}}</span></td>
+                    <td>{{line.total  | currency:"&euro;"}}</td>
+                    <td><span class="" editable-text="line.tax">{{line.tax}}</span></td>
+                    <td><span class="" editable-text="line.dto" e-onChange="{{recalculateDiscount()}}">{{line.dto}}</span> - {{line.total * line.dto | currency:"&euro;"}}</td>
+                    <td><span class="glyphicon glyphicon-remove" ng-click="deleteLine($index)"></span></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="btn-group">
+            <button type="button" class="btn btn-info"ng-click="addLine()">Añadir Lineas</button>
+            <button type="button" class="btn btn-info" ng-click="reset()">Imprimir Ticket</button>
+            <button type="button" class="btn btn-info" ng-click="reset()">Facturar</button>
+        </div>
+        <div class="btn-group" style="float:right;">
+            <button type="button" class="btn btn-info">Guardar</button>
+            <button type="button" class="btn btn-info" ng-click="reset()">Restaurar</button>
+        </div>
+    </div>
+</div>

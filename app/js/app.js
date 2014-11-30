@@ -10,10 +10,6 @@ app.config(function ($routeProvider) {
         templateUrl: "../view/user/user.html",
         controller: "UserController"
     }).
-    when("/listProducts",{
-       templateUrl: "../view/product/listProduct.html",
-        controller: "ProductListController"
-    }).
     when("/product/:id",{
         templateUrl: "../view/product/product.html",
         controller: "ProductController"
@@ -21,6 +17,14 @@ app.config(function ($routeProvider) {
     when("/client/:id",{
         templateUrl: "../view/client/client.html",
         controller: "ClientController"
+    }).
+    when("/ticket/:id",{
+        templateUrl: "../view/ticket/ticket.html",
+        controller: "TicketController"
+    }).
+    when("/listProducts",{
+        templateUrl: "../view/product/listProduct.html",
+        controller: "ProductListController"
     }).
     when("/listTickets",{
         templateUrl: "../view/ticket/listTicket.html",

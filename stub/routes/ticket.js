@@ -88,6 +88,48 @@ var TICKETS = [{
     client : 2,
     invoice : 2,
     lines: [TICKETS_LINES[7]]
+},{
+    id: 4,
+    createdAt : new Date(2014, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
+    client : 2,
+    invoice : 2,
+    lines: [TICKETS_LINES[4],TICKETS_LINES[5],TICKETS_LINES[6]]
+},{
+    id: 5,
+    createdAt : new Date(2014, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
+    client : 2,
+    invoice : 2,
+    lines: [TICKETS_LINES[7]]
+},{
+    id: 6,
+    createdAt : new Date(2014, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
+    client : 2,
+    invoice : 2,
+    lines: [TICKETS_LINES[4],TICKETS_LINES[5],TICKETS_LINES[6]]
+},{
+    id: 7,
+    createdAt : new Date(2014, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
+    client : 2,
+    invoice : null,
+    lines: [TICKETS_LINES[7]]
+},{
+    id: 8,
+    createdAt : new Date(2014, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
+    client : 2,
+    invoice : null,
+    lines: [TICKETS_LINES[4],TICKETS_LINES[5],TICKETS_LINES[6]]
+},{
+    id: 9,
+    createdAt : new Date(2014, 5, 13, 9, 30, 45),
+    updatedAt : new Date(2014, 9, 10, 9, 30, 45),
+    client : 2,
+    invoice : null,
+    lines: [TICKETS_LINES[7]]
 }];
 
     module.exports.fetchTickets = function (req, res) {
