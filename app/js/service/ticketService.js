@@ -13,6 +13,10 @@ angular.module("app").service("TicketService", function ($http,$q, serverConstan
         },
         getId: function (id) {
             return $http.get(route + id);
+        },
+        getByClient: function (id) {
+            var routeClient = serverConstants.baseUrl + "/user/"+id+"/ticket/";
+            return $http.get(routeClient);
         }
     };
 

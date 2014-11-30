@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute','xeditable']);
+var app = angular.module("app", ['ngRoute','xeditable','angularUtils.directives.dirPagination']);
 
 app.config(function ($routeProvider) {
     "use strict";

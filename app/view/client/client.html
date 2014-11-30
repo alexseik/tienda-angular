@@ -28,7 +28,49 @@
                     (<span class="" editable-text="client.phone[$index].description">{{phone.description}}</span>)
                 </div>
             </div>
-            <div class="col-md-8"></div>
+            <div class="col-md-8">
+                <div class="row">
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Factura</th>
+                            <th>Total</th>
+                            <th>Creado</th>
+                            <th>Actualizado</th>
+                        </tr>
+                        <tr ng-repeat="ticket in tickets">
+                            <td><a ng-href="#ticket/{{ticket.id}}">{{ticket.id}}</a></td>
+                            <td><a ng-href="#invoice/{{ticket.invoice}}">{{ticket.invoice}}</a></td>
+                            <td>{{ticket.total  | currency:"&euro;"}}</td>
+                            <td>{{ticket.createdAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
+                            <td>{{ticket.updatedAt | date : 'dd/MM/yyyy' : 'UTC'}}</td>
+                            <td><span class="glyphicon glyphicon-pencil"></span></td>
+                            <td><span class="glyphicon glyphicon-remove"></span></td>
+                            <td><span class="glyphicon glyphicon-ok"></span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="">
+                        <nav>
+                            <ul class="pagination">
+                                <li ng-class="{disabled: ticketsCurrentPage == 0}">
+                                    <a href ng-click="ticketsPrevPage()">« Prev</a>
+                                </li>
+
+                                <li ng-repeat="n in ticketsRange(pagedTickets.length) "
+                                    ng-class="{active: n == ticketsCurrentPage}"
+                                    ng-click="ticketsSetPage()">
+                                    <a href ng-bind="n + 1"></a>
+                                </li>
+
+                                <li ng-class="{disabled: (ticketsCurrentPage) == pagedTickets.length - 1}">
+                                    <a href ng-click="ticketsNextPage()">Next »</a>
+                                </li>
+                            </ul>
+                        </nav></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="panel-footer"></div>

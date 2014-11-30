@@ -101,13 +101,12 @@ var TICKETS = [{
 };
 
     module.exports.fetchTicketsByClient = function (req,res){
-    var clientId = req.params.id;
+    var clientId = parseInt(req.params.id);
     var result = [];
-    var i=0;
-    for(var idx in TICKETS){
-        if(TICKETS[idx].client === clientId){
-            result[i]=TICKETS[idx];
-            i++;
+
+    for(var i=0;i<TICKETS.length;i++){
+        if(TICKETS[i].client === clientId){
+            result.push(TICKETS[i]);
         }
     }
     if (result != []) return res.json(200, result);
