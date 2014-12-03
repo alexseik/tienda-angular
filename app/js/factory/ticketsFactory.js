@@ -1,4 +1,4 @@
-angular.module('app').factory('Tickets', function($log,TicketService,User){
+angular.module('app').factory('Tickets', function($log,TicketService,User, messagingService, events){
     'use strict';
 
 
@@ -18,7 +18,12 @@ angular.module('app').factory('Tickets', function($log,TicketService,User){
                     value.total = total;
                     this.push(value);
                 },ticketList);
+                self.length = ticketList.length;
                 angular.extend(self,ticketList);
+                messagingService.publish(
+                    events.message._TICKET_LOAD_COMPLETE_,
+                    [self]
+                );
             }).error(function(data,status){
                 $log.error("Server KO. Status: " + status + " Msg: " + data);
             });

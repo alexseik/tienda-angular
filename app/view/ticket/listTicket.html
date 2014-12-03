@@ -16,7 +16,7 @@
                     <th>Creado</th>
                     <th>Actualizado</th>
                 </tr>
-                <tr ng-repeat="ticket in ticketList">
+                <tr ng-repeat="ticket in ticketList[currentPage-1]">
                     <td><a ng-href="#ticket/{{ticket.id}}">{{ticket.id}}</a></td>
                     <td><a ng-href="#client/{{ticket.client.id}}">{{ticket.client.name}}</a></td>
                     <td><a ng-href="#invoice/{{ticket.invoice}}">{{ticket.invoice}}</a></td>
@@ -30,7 +30,8 @@
             </table>
         </div>
         <div class="panel-footer">
-            <pagination total-items="ticketList.length" ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()"></pagination>
+            <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()" num-pages="numPages"></pagination>
+            <pager total-items="totalItems" ng-model="currentPage"></pager>
         </div>
     </div>
 </div>
