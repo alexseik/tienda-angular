@@ -5,18 +5,19 @@ angular.module("app").controller("TicketListController", function ($scope,Ticket
     $scope.totalItems = 0;
 
     $scope.currentPage = 1;
-    $scope.maxSize = 5;
-    $scope.numPages = 1;
+    $scope.itemsPerPage = 5;
+    //$scope.numPages = 1;
 
     $scope.ticketLoad = function (tickets){
         $scope.ticketList = tickets;
         $scope.totalItems = $scope.ticketList.length;
-        $scope.numPages = $scope.totalItems / $scope.maxSize;
+        //$scope.numPages = $scope.totalItems / $scope.maxSize;
+        $scope.currentPage = 1;
         for (var i = 0; i < $scope.totalItems; i++) {
-            if (i % $scope.maxSize === 0) {
-                $scope.ticketList[Math.floor(i / $scope.maxSize)] = [ tickets[i] ];
+            if (i % $scope.itemsPerPage === 0) {
+                $scope.ticketList[Math.floor(i / $scope.itemsPerPage)] = [ tickets[i] ];
             } else {
-                $scope.ticketList[Math.floor(i / $scope.maxSize)].push(tickets[i]);
+                $scope.ticketList[Math.floor(i / $scope.itemsPerPage)].push(tickets[i]);
             }
         }
     };
@@ -25,10 +26,6 @@ angular.module("app").controller("TicketListController", function ($scope,Ticket
         events.message._TICKET_LOAD_COMPLETE_,
         $scope.ticketLoad
     );
-
-    $scope.pageChanged = function() {
-
-    };
 
     $scope.$on('$destroy', function(){
         messagingService.unsubscribe($scope.ticketsHandle);

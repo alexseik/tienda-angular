@@ -30,8 +30,8 @@
             </table>
         </div>
         <div class="panel-footer">
-            <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" ng-change="pageChanged()" num-pages="numPages"></pagination>
-            <pager total-items="totalItems" ng-model="currentPage"></pager>
+            <pagination total-items="totalItems" ng-model="currentPage" items-per-page="{{itemsPerPage}}" class="pagination-sm" ></pagination>
+            <pager total-items="totalItems" ng-model="currentPage" items-per-page="{{itemsPerPage}}"></pager>
         </div>
     </div>
 </div>
