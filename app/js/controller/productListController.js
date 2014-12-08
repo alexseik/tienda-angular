@@ -1,23 +1,16 @@
-angular.module("app").controller("ProductListController", function ($scope, $routeParams, ProductService,serverConstants, $log) {
+angular.module("app").controller("ProductListController", function ($scope, $routeParams, ProductFactory,serverConstants,messagingService,events, $log) {
     "use strict";
 
     $scope.itemsPerPage = 8;
     $scope.pagedItems = [];
-    $scope.currentPage = 0;
+    $scope.currentPage = 1;
     $scope.viewMode = 'grid';
 
     $scope.typeProduct = serverConstants.typeProduct;
 
     $scope.baseImageRoute = serverConstants.baseUrl+'/product/';
 
-    ProductService.list()
-        .success(function (data) {
-            $scope.productList = data;
-            $scope.groupToPages($scope.itemsPerPage);
-        })
-        .error(function (data, status) {
-            $log.error("Server KO. Status: " + status + " Msg: " + data);
-        });
+    $scope.productList = ProductFactory.getList();
 
     $scope.groupToPages = function (size) {
 
@@ -28,14 +21,20 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
 
         for (var i = 0; i < $scope.productList.length; i++) {
             if (i % $scope.itemsPerPage === 0) {
-                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)] = [ $scope.productList[i] ];
+                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage) + 1] = [ $scope.productList[i] ];
             } else {
-                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)].push($scope.productList[i]);
+                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage) + 1].push($scope.productList[i]);
             }
         }
         if ($scope.currentPage > $scope.pagedItems.length){
             $scope.currentPage=0;
         }
+    };
+
+    $scope.productsLoad = function(data){
+        $scope.productList = data;
+        $scope.totalItems = $scope.productList.length;
+        $scope.groupToPages($scope.itemsPerPage);
     };
 
     $scope.setViewMode = function (mode){
@@ -47,32 +46,16 @@ angular.module("app").controller("ProductListController", function ($scope, $rou
         }
     };
 
-    $scope.range = function (size) {
-        var ret = [];
-
-        for (var i = 0; i < size; i++) {
-            ret.push(i);
-        }
-
-        return ret;
-    };
-    $scope.prevPage = function () {
-        if ($scope.currentPage > 0) {
-            $scope.currentPage--;
-        }
-    };
-
-    $scope.nextPage = function () {
-        if ($scope.currentPage < $scope.pagedItems.length - 1) {
-            $scope.currentPage++;
-        }
-    };
-
-    $scope.setPage = function () {
-        $scope.currentPage = this.n;
-    };
-
     $scope.resetTypeProductFilter = function(){
         $scope.search = undefined;
     };
+
+    $scope.productsHandle = messagingService.subscribe(
+        events.message._PRODUCTS_LOAD_COMPLETE,
+        $scope.productsLoad
+    );
+
+    $scope.$on('$destroy', function(){
+        messagingService.unsubscribe($scope.productsHandle);
+    });
 });

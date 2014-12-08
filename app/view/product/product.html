@@ -1,13 +1,13 @@
 <div header></div>
 <div class="row" >
     <div class="panel panel-default">
-        <div class="panel-heading"><h4><span editable-text="product.name">{{product.name}}</span><span  editable-text="product.ean13"> - {{product.ean13}}</span></h4></div>
+        <div class="panel-heading"><h4><span editable-text="product.name">{{product.name || 'introduzca nombre'}}</span><span  editable-text="product.ean13"> - {{product.ean13 || 'introduzca ean13'}}</span></h4></div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-4">PVP: </div>
-                        <div class="col-md-8"><span class="" editable-text="product.pvp">{{product.pvp | currency:"&euro;"}}</span></div>
+                        <div class="col-md-8"><span class="" editable-text="product.pvp">{{product.pvp || 'introduzca precio'}}</span><span class="glyphicon glyphicon-euro" style="font-size: 10px;margin-left: 5px;"></span></div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">Tipo:</div>
@@ -24,10 +24,10 @@
                     <br/>
                     <div class="row">
                         <div class="col-md-4">Creado:</div>
-                        <div class="col-md-8"><span>{{product.createdAt | date : 'dd/MM/yyyy hh:mm a'}}</span></div>
+                        <div class="col-md-8"><span ng-if="product.createdAt">{{product.createdAt | date : 'dd/MM/yyyy hh:mm a'}}</span><span ng-if="!product.createdAt">no creado</span></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">Actualizado:</div><div class="col-md-8"><span>{{product.updatedAt | date : 'dd/MM/yyyy hh:mm a'}}</span>
+                        <div class="col-md-4">Actualizado:</div><div class="col-md-8"><span ng-if="product.updatedAt">{{product.updatedAt | date : 'dd/MM/yyyy hh:mm a'}}</span><span ng-if="!product.updatedAt">no creado</span>
                     </div></div>
                     <div class="row" style="margin-top: 10px;">
                         <div class="col-md-8"><input class="form-control" type="file" ng-file-select multiple/></div></div>
@@ -40,7 +40,7 @@
                             <div class="thumbnail">
                                 <div class="holder">
                                     <span ng-click="deleteOldImage($index)" class="glyphicon glyphicon-remove-circle borrarImagen"></span>
-                                    <img src="{{baseImageRoute+product.id+image.route}}" />
+                                    <img ng-src="{{baseImageRoute+product.id+image.route}}" />
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
         </div>
         <div class="panel-footer">
             <div class="btn-group">
-                <button type="button" class="btn btn-info">Guardar</button>
+                <button type="button" class="btn btn-info" ng-click="save()">Guardar</button>
                 <button type="button" class="btn btn-info" ng-click="reset()">Restaurar</button>
             </div>
         </div>

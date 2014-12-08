@@ -1,9 +1,11 @@
 /*global _:false*/
-angular.module("app").controller("ProductController", function ($scope,$filter,$routeParams, ProductService,FileReader,serverConstants, $log){
+angular.module("app").controller("ProductController", function ($scope,$location,$filter,$routeParams, ProductFactory,FileReader,serverConstants,messagingService,events){
     "use strict";
     $scope.product = {
         typeProduct : null
     };
+
+    $scope.savedProduct = undefined;
 
     $scope.images = [];
 
@@ -11,19 +13,33 @@ angular.module("app").controller("ProductController", function ($scope,$filter,$
 
     $scope.baseImageRoute = serverConstants.baseUrl+'/product/';
 
-    ProductService.getId($routeParams.id)
-        .success(function (data) {
-            $scope.product = data;
-            if ($scope.product.typeProduct === undefined) {$scope.product.typeProduct = "";}
-            $scope.originalProduct = angular.copy($scope.product);
-        })
-        .error(function (data, status) {
-            $log.error("Server KO. Status: " + status + " Msg: " + data);
-        });
+    $scope.product = ProductFactory.getById($routeParams.id);
+
+
+    $scope.productLoad = function(data){
+        $scope.product = data;
+        $scope.originalProduct = angular.copy($scope.product);
+    };
+
+    $scope.productSave = function (data){
+        $location.path('/product/' + data.id);
+    };
 
     $scope.reset = function (){
       $scope.product = $scope.originalProduct;
       $scope.images = [];
+    };
+
+    $scope.save = function(){
+        var productDto = {
+            product : $scope.product,
+            images : $scope.images
+        };
+        if (productDto.product.id !== ""){
+            ProductFactory.update(productDto);
+        } else {
+            ProductFactory.add(productDto);
+        }
     };
 
     $scope.showStatus = function() {
@@ -47,5 +63,19 @@ angular.module("app").controller("ProductController", function ($scope,$filter,$
     $scope.deleteNewImage = function (index){
         $scope.images.splice(index,1);
     };
+
+    $scope.productLoadHandle = messagingService.subscribe(
+        events.message._PRODUCT_LOAD_COMPLETE,
+        $scope.productLoad
+    );
+
+    $scope.productAddHandle = messagingService.subscribe(
+        events.message._PRODUCT_SAVE_COMPLETE,
+        $scope.productSave
+    );
+
+    $scope.$on('$destroy', function(){
+        messagingService.unsubscribe($scope.productLoadHandle);
+    });
 
 });

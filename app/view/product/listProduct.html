@@ -97,23 +97,9 @@
             </div>
             <div class="panel-footer">
                 <div class="listProductFooter">
-                <nav>
-                    <ul class="pagination ">
-                        <li ng-class="{disabled: currentPage == 0}">
-                            <a href ng-click="prevPage()">« Prev</a>
-                        </li>
 
-                        <li ng-repeat="n in range(pagedItems.length) "
-                            ng-class="{active: n == currentPage}"
-                            ng-click="setPage()">
-                            <a href ng-bind="n + 1"></a>
-                        </li>
-
-                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
-                            <a href ng-click="nextPage()">Next »</a>
-                        </li>
-                    </ul>
-                </nav></div>
+                    <pagination total-items="totalItems" ng-model="currentPage" items-per-page="{{itemsPerPage}}" class="pagination-sm" ></pagination>
+                </div>
             </div>
         </div>
     </div>

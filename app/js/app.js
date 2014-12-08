@@ -30,6 +30,14 @@ app.config(function ($routeProvider) {
         templateUrl: "../view/ticket/listTicket.html",
         controller: "TicketListController"
     }).
+    when("/newTicket",{
+        templateUrl: "../view/ticket/ticket.html",
+        controller: "TicketController"
+    }).
+    when("/newProduct",{
+        templateUrl: "../view/product/product.html",
+        controller: "ProductController"
+    }).
     otherwise({
         redirectTo: "/home"
     });

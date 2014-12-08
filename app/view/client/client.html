@@ -39,7 +39,7 @@
                             <th>Creado</th>
                             <th>Actualizado</th>
                         </tr>
-                        <tr ng-repeat="ticket in tickets">
+                        <tr ng-repeat="ticket in ticketList[currentPage-1]">
                             <td><a ng-href="#ticket/{{ticket.id}}">{{ticket.id}}</a></td>
                             <td><a ng-href="#invoice/{{ticket.invoice}}">{{ticket.invoice}}</a></td>
                             <td>{{ticket.total  | currency:"&euro;"}}</td>
@@ -51,24 +51,7 @@
                     </table>
                 </div>
                 <div class="row">
-                    <div class="">
-                        <nav>
-                            <ul class="pagination">
-                                <li ng-class="{disabled: ticketsCurrentPage == 0}">
-                                    <a href ng-click="ticketsPrevPage()">« Prev</a>
-                                </li>
-
-                                <li ng-repeat="n in ticketsRange(pagedTickets.length) "
-                                    ng-class="{active: n == ticketsCurrentPage}"
-                                    ng-click="ticketsSetPage()">
-                                    <a href ng-bind="n + 1"></a>
-                                </li>
-
-                                <li ng-class="{disabled: (ticketsCurrentPage) == pagedTickets.length - 1}">
-                                    <a href ng-click="ticketsNextPage()">Next »</a>
-                                </li>
-                            </ul>
-                        </nav></div>
+                    <pagination total-items="totalItems" ng-model="currentPage" items-per-page="{{itemsPerPage}}" class="pagination-sm" ></pagination>
                 </div>
             </div>
         </div>

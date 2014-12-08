@@ -36,7 +36,7 @@ angular.module('app').factory('Tickets', function($log,TicketService,User, messa
     return Tickets;
 });
 
-angular.module('app').factory('TicketsByClient', function($log,TicketService){
+angular.module('app').factory('TicketsByClient', function($log,TicketService,messagingService, events){
     'use strict';
 
 
@@ -56,7 +56,12 @@ angular.module('app').factory('TicketsByClient', function($log,TicketService){
                     value.total = total;
                     this.push(value);
                 },ticketList);
+                self.length = ticketList.length;
                 angular.extend(self,ticketList);
+                messagingService.publish(
+                    events.message._TICKET_LOAD_COMPLETE_,
+                    [self]
+                );
             }).error(function(data,status){
                 $log.error("Server KO. Status: " + status + " Msg: " + data);
             });
@@ -69,7 +74,7 @@ angular.module('app').factory('TicketsByClient', function($log,TicketService){
     return TicketsByClient;
 });
 
-angular.module('app').factory('Ticket', function($log,TicketService,User,Product){
+angular.module('app').factory('Ticket', function($log,TicketService,User,ProductFactory){
     'use strict';
 
 
@@ -77,24 +82,30 @@ angular.module('app').factory('Ticket', function($log,TicketService,User,Product
 
         this.initialize = function(){
             var self = this;
+            self.id = '';
+            self.client = '';
+            self.total = 0;
+            self.descountTotal =0;
+            self.numLines = 0;
+            self.lines = [];
+            if (ticket !== undefined){
+                TicketService.getId(ticket).success(function(data){
+                    var client = new User(data.client);
 
-            TicketService.getId(ticket).success(function(data){
-                var client = new User(data.client);
-
-                var result = {
-                    id : data.id,
-                    client : client,
-                    total : 0,
-                    descountTotal :0,
-                    numLines : 0,
-                    lines : []
-                };
-                angular.forEach(data.lines,function(line,key){
-                    var product = new Product(line.product);
-                    var lineTotal = line.quantity*line.unitPrice;
-                    var dto;
-                    if (line.dto === undefined){ dto = 0;}
-                    else {dto = line.dto;}
+                    var result = {
+                        id : data.id,
+                        client : client,
+                        total : 0,
+                        descountTotal :0,
+                        numLines : 0,
+                        lines : []
+                    };
+                    angular.forEach(data.lines,function(line,key){
+                        var product = ProductFactory.getById(line.product);
+                        var lineTotal = line.quantity*line.unitPrice;
+                        var dto;
+                        if (line.dto === undefined){ dto = 0;}
+                        else {dto = line.dto;}
                         var auxLine = {
                             total : lineTotal,
                             product : product,
@@ -105,16 +116,17 @@ angular.module('app').factory('Ticket', function($log,TicketService,User,Product
                             dto : dto
                         };
 
-                    result.lines[result.numLines] = auxLine;
-                    result.numLines += 1;
-                    result.total += auxLine.total;
-                    result.descountTotal += auxLine.dto * auxLine.total;
-                },result);
+                        result.lines[result.numLines] = auxLine;
+                        result.numLines += 1;
+                        result.total += auxLine.total;
+                        result.descountTotal += auxLine.dto * auxLine.total;
+                    },result);
 
-                angular.extend(self,result);
-            }).error(function(data,status){
-                $log.error("Server KO. Status: " + status + " Msg: " + data);
-            });
+                    angular.extend(self,result);
+                }).error(function(data,status){
+                    $log.error("Server KO. Status: " + status + " Msg: " + data);
+                });
+            }
         };
 
         this.initialize();

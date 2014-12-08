@@ -12,6 +12,12 @@ angular.module("app").service("ProductService", function ($http, serverConstants
         },
         getId: function (id) {
             return $http.get(route + id);
+        },
+        update: function(id,itemDto){
+            return $http.put(route + id, itemDto);
+        },
+        remove: function(id){
+            return $http.delete(route + id);
         }
     };
 

@@ -2,6 +2,7 @@
 
 
 var products = require('./data/products.js')(products);
+var images = require('./data/images.js')(products);
 
 exports.fetchProducts = function (req, res) {
     return res.json(200, products.PRODUCTS);
@@ -38,10 +39,11 @@ exports.saveProduct = function (req, res){
     if (dto.images != undefined){
         dto.product.images = [];
         for (var idx in dto.images){
-            dto.product.images = dto.product.images.concat(IMAGES[0]);
+            dto.product.images = dto.product.productImages.push(images.IMAGES[0]);
         }
     }
     dto.product.id = products.PRODUCTS.length + 1;
+    dto.product.createdAt =  new Date();
     return res.json(201, dto.product);
 };
 
@@ -62,12 +64,12 @@ exports.updateProduct = function (req, res) {
         result = dto.product;
     }
     if (dto.images != undefined){
-        result.images = [];
         for (var idx in dto.images){
-            result.images = result.images.concat(IMAGES[0]);
+            result.productImages.push(images.IMAGES[0]);
         }
     }
-    return res.json(200, dto.product);
+
+    return res.json(200, result);
 };
 
 exports.deleteProduct = function (req, res){

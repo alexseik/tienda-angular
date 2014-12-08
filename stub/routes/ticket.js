@@ -5,7 +5,7 @@ var TICKETS_LINES = [{
     id: 1,
     createdAt : new Date(2014, 5, 13, 9, 30, 45),
     updatedAt : new Date(2014, 9, 10, 9, 30, 45),
-    product: 1,
+    product: 136,
     quantity: 5,
     unitPrice: 0.50,
     tax: 0.21
