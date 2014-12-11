@@ -117,10 +117,14 @@ exports.fetchImageOfProduct = function (req, res){
 
 exports.fetchProductsByQuery = function (req,res){
     var ean13 = '';
+    var name = '';
 
     for (var prop in req.query){
         if (prop === 'ean13'){
             ean13 =  req.query['ean13'];
+        }
+        if (prop === 'name'){
+            name =  req.query['name'];
         }
     }
     if (ean13 !== ''){
@@ -128,6 +132,17 @@ exports.fetchProductsByQuery = function (req,res){
             if(products.PRODUCTS[i].ean13 == ean13){
                 return res.json(200,[products.PRODUCTS[i]]);
             }
+        }
+    }
+    if (name !== ''){
+        var resultList = [];
+        for(var i = 0; i < products.PRODUCTS.length; i++){
+            if(products.PRODUCTS[i].name.toUpperCase().indexOf(name.toUpperCase()) > -1){
+                resultList.push(products.PRODUCTS[i]);
+            }
+        }
+        if (resultList.length > 0){
+            return res.json(200,resultList);
         }
     }
     return res.json(404,[]);

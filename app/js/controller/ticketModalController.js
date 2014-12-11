@@ -3,7 +3,9 @@ angular.module('app').controller('TicketModalInstanceController', function ($sco
 
     $scope.alertsMsg = [
         { type: 'danger', msg: 'EAN13 no encontrado' },
-        { type: 'success', msg: 'Producto encontrado' }
+        { type: 'success', msg: 'Producto encontrado' },
+        { type: 'success', msg: 'Productos encontrados' },
+        { type: 'danger', msg: 'Producto no encontrado' },
     ];
 
     $scope.alerts = [];
@@ -31,21 +33,52 @@ angular.module('app').controller('TicketModalInstanceController', function ($sco
 
     $scope.added = [];
 
-    $scope.searchProduct = function(){
+    $scope.productList = false;
+
+    $scope.searchProductByEan13 = function(){
         $scope.alerts = [];
-        var p = product();
+        var p = {ean13 : $scope.newLine.product.ean13};
         p.ean13 = $scope.newLine.product.ean13;
         ProductFactory.getByQuery(p);
     };
 
-    $scope.productLoad = function(productList){
-        $scope.newLine.product = productList[0];
-        $scope.newLine.unitPrice = productList[0].pvp;
-        $scope.newLine.quantity = 1;
-        $scope.alerts.push($scope.alertsMsg[1]);
+    $scope.searchProductLikeName = function(){
+        if (($scope.newLine.product.name !== '') &&
+            ($scope.newLine.product.name.length >= 3) &&
+            ($scope.newLine.product.name.length % 3 === 0)){
+
+            $scope.alerts = [];
+            var p = {name : $scope.newLine.product.name};
+            ProductFactory.getByQuery(p);
+        }
     };
-    $scope.productLoadError = function(){
-        $scope.alerts.push($scope.alertsMsg[0]);
+
+    $scope.selectProduct = function(index){
+        $scope.newLine.product = $scope.productList[index];
+        $scope.newLine.unitPrice = $scope.productList[index].pvp;
+        $scope.productList = [];
+        $scope.alerts = [];
+    };
+
+    $scope.productLoad = function(productList,productQuery){
+        if (productQuery.ean13 !== undefined && productQuery.ean13 !== ''){
+            $scope.newLine.product = productList[0];
+            $scope.newLine.unitPrice = productList[0].pvp;
+            $scope.newLine.quantity = 1;
+            $scope.alerts.push($scope.alertsMsg[1]);
+        } else if (productQuery.name !== undefined && productQuery.name !== ''){
+            $scope.productList = productList.splice(0,10);
+            $scope.alerts.push($scope.alertsMsg[2]);
+        }
+
+    };
+    $scope.productLoadError = function(productList,productQuery){
+        if (productQuery.ean13 !== undefined && productQuery.ean13 !== '') {
+            $scope.alerts.push($scope.alertsMsg[0]);
+        } else if (productQuery.name !== undefined && productQuery.name !== '') {
+            $scope.alerts.push($scope.alertsMsg[3]);
+        }
+        $scope.productList = [];
     };
 
     $scope.productHandle = messagingService.subscribe(

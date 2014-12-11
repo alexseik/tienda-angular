@@ -77,13 +77,13 @@ angular.module('app').service('ProductFactory',function ($log,ProductService,pro
 
                 messagingService.publish(
                     events.message._PRODUCTS_LOAD_COMPLETE,
-                    [data] );
+                    [data,product] );
             })
             .error(function(data,status){
                 $log.error("Server KO. Status: " + status + " Msg: " + data);
                 messagingService.publish(
                     events.message._PRODUCTS_LOAD_ERROR,
-                    [data] );
+                    [data,product] );
             });
     };
 
