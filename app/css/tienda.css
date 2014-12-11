@@ -87,3 +87,9 @@ img {
 .indentText{
     margin-left: 5px;
 }
+
+/*Aumentar ancho modal*/
+.modal-dialog {
+    width :90%;
+    max-width: 800px;
+}

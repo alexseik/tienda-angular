@@ -113,4 +113,23 @@ exports.fetchImageOfProduct = function (req, res){
             console.log('Sent:', fileName);
         }
     });
-}
+};
+
+exports.fetchProductsByQuery = function (req,res){
+    var ean13 = '';
+
+    for (var prop in req.query){
+        if (prop === 'ean13'){
+            ean13 =  req.query['ean13'];
+        }
+    }
+    if (ean13 !== ''){
+        for(var i = 0; i < products.PRODUCTS.length; i++){
+            if(products.PRODUCTS[i].ean13 == ean13){
+                return res.json(200,[products.PRODUCTS[i]]);
+            }
+        }
+    }
+    return res.json(404,[]);
+
+};

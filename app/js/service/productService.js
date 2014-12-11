@@ -18,6 +18,13 @@ angular.module("app").service("ProductService", function ($http, serverConstants
         },
         remove: function(id){
             return $http.delete(route + id);
+        },
+        getByQuery: function(product){
+            return $http({
+                method: 'GET',
+                url: route+'query',
+                params : product
+            });
         }
     };
 

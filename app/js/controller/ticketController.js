@@ -1,4 +1,4 @@
-angular.module("app").controller("TicketController", function ($scope,$routeParams,Ticket) {
+angular.module("app").controller("TicketController", function ($scope,$routeParams,$modal,$log,Ticket) {
     "use strict";
     $scope.ticket = new Ticket($routeParams.id);
 
@@ -36,5 +36,25 @@ angular.module("app").controller("TicketController", function ($scope,$routePara
             dto : 0
         };
         $scope.ticket.lines.push(newLine);
+    };
+
+    $scope.openModal = function () {
+
+        var modalInstance = $modal.open({
+            templateUrl: '../../view/ticket/modal.html',
+            controller: 'TicketModalInstanceController',
+            size: 'lg',
+            resolve: {
+                parentScope: function () {
+                    return $scope;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (added) {
+            $scope.ticket.lines.concat(added);
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
     };
 });

@@ -1,10 +1,42 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4>
-            <span  style="padding-top: 5px;">ID: </span>
-            <span class="label label-default"></span>
-    </div>
-    <div class="panel-body">
 
+<div class="modal-header">
+    <h3 class="modal-title">Vende productos!</h3>
+</div>
+<div class="modal-body">
+    <div class="row" >
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</alert>
+        <form class="form-inline" role="form">
+            <div class="form-group" style="width: 250px; margin-bottom: 5px;">
+                <div class="input-group">
+                    <label class="sr-only" for="inputModalTicketEan13">EAN13</label>
+                    <div class="input-group-addon">EAN13</div>
+                    <input type="text" class="form-control"
+                           id="inputModalTicketEan13" placeholder="Introduzca ean13"
+                           ng-model="newLine.product.ean13"
+                           ng-blur="searchProduct()" select-on-click/>
+                </div>
+            </div>
+            <div class="form-group" style="width: 250px; margin-bottom: 5px;">
+                <label class="sr-only" for="inputModalTicketName">Nombre</label>
+                <input ng-model="newLine.product.name" type="text" class="form-control" id="inputModalTicketName" placeholder="Introduzca nombre"/>
+            </div>
+            <div class="form-group" style="width: 130px; margin-bottom: 5px;">
+                <div class="input-group">
+                    <label class="sr-only" for="inputModalTicketCantidad">Cantidad</label>
+                    <input ng-model="newLine.quantity" type="number" class="form-control" id="inputModalTicketCantidad" placeholder="Cantidad" select-on-click>
+                </div>
+            </div>
+            <div class="form-group" style="width: 130px; margin-bottom: 5px;">
+                <div class="input-group">
+                    <label class="sr-only" for="inputModalTicketPrice">Precio Unitario</label>
+                    <input ng-model="newLine.unitPrice" type="text" class="form-control" id="inputModalTicketPrice" placeholder="Precio">
+                    <div class="input-group-addon">€</div>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="insertLine()">Insertar</button>
+    <button class="btn btn-warning" ng-click="cancel()">Salir</button>
 </div>
